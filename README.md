@@ -15,6 +15,7 @@ Example:
 If loading fib, also use:  
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --> D 50  
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --> \<numIterationsThroughFibonacciSequence\>  
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --> .  
   
 #### Add list of program starting locations
 D \<addrOfList\>  
