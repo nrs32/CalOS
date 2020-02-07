@@ -1,5 +1,5 @@
-# CalOS
+### CalOS
 Simple OS written in Python
 
-# run main
+#### run main
 python main.py
