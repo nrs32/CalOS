@@ -12,6 +12,10 @@ Example:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --> l 20 mult.asm  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --> l 100 fib.asm  
   
+If loading fib, also use:  
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --> D 50  
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --> \<numIterationsThroughFibonacciSequence\>  
+  
 #### Add list of program starting locations
 D \<addrOfList\>  
 Enter values in list  
