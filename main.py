@@ -3,6 +3,9 @@ alter RAM, start the CPU, etc.
 
 @author Victor Norman
 @date 12/26/17
+
+@author (editor) Nikita Sietsema
+@date 6 February 2020
 '''
 
 
@@ -88,10 +91,18 @@ class Monitor:
                     print("C <addr>: put code into RAM starting at addr")
                     print("D <addr>: put data values into RAM starting at addr")
                     print("S <start> <end>: show memory from start to end")
+
+                    # NS - Add command for batch run 
+                    print("R <addr>: run programs whose starting locations are in memory starting at location <addr>") 
+
                     print("X <addr>: execute program starting at addr")
                     print("L <addr> <tapename>: load a program from tape to bytes starting at addr")
                     print("W <start> <end> <tapename>: write bytes from start to end to tape")
                     print("! : Toggle debugging on or off -- off at startup.")
+
+                    # NS - Add command to quit program
+                    print("Q : quit program (power off)") 
+
                     continue
 
                 # Remove all commas, just in case.
@@ -100,6 +111,11 @@ class Monitor:
                 if instr.startswith("!"):
                     self._debug = not self._debug
                     continue
+
+                # NS - Quit Program (power off monitor)
+                if instr.upper().startswith('Q'):
+                    print("Goodbye.")
+                    break
 
                 try:
                     arg1 = eval(instr.split()[1])
@@ -115,6 +131,11 @@ class Monitor:
                         print("Illegal format: ", instr.split()[2])
                         continue
                     self._dump_ram(arg1, endaddr)
+
+                # NS - Handle run batch case
+                elif instr.upper().startswith('R '):
+                    self._run_batch(arg1)
+
                 elif instr.upper().startswith('D '):
                     self._poke_ram(arg1)
                 elif instr.upper().startswith('X '):
@@ -198,7 +219,16 @@ class Monitor:
             if not self._ram.is_legal_addr(curr_addr):
                 print("End of RAM")
                 return
-        
+
+    ## NS- Runs a list of programs from the starting locations listed at addr
+    ## Execution ends when a 0 is read from the list
+    def _run_batch(self, addr):
+        # creates a new thread, passing in ram, the os, and the
+        # starting address
+        self._cpu = CPU(self._ram, calos.CalOS(), addr, self._debug)
+        self._cpu.set_program_list_addr(addr) # NS - Set the program list addr
+        self._cpu.start()		# call run()
+        self._cpu.join()		# wait for it to end
 
     ## Add data to RAM. If addr is valid, ask for user input.
     ## Validate user input and continue reading input until user types '.' to end input.

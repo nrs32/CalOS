@@ -2,6 +2,9 @@
 
 @author Victor Norman
 @date 12/26/17
+
+@author (editor) Nikita Sietsema
+@date 6 February 2020
 '''
 
 import time
@@ -11,7 +14,7 @@ import threading   # for CPU
 DELAY_BETWEEN_INSTRUCTIONS = 0.2
 
 class CPU(threading.Thread):
-    def __init__(self, ram, os, startAddr, debug, num=0):
+    def __init__(self, ram, os, startAddr, debug, num = 0):
         threading.Thread.__init__(self)
 
         self._num = num   # unique ID of this cpu
@@ -25,6 +28,11 @@ class CPU(threading.Thread):
         self._ram = ram
         self._os = os
         self._debug = debug
+
+        # NS - Default batchMode is false.
+        # batchMode is updated when provided a valid program_list_addr
+        self._isBatchMode = False
+        self._program_list_addr = set()
 
         # TODO: need to protect these next two variables as they are shared
         # between the CPU thread and the device threads.
@@ -50,6 +58,11 @@ class CPU(threading.Thread):
         assert isinstance(intr_val, bool)
         self._intr_raised = intr_val
 
+    # NS - Set the addr responsible for storing the list of program starting addresses
+    def set_program_list_addr(self, addr):
+        self._isBatchMode = True
+        self._program_list_addr = addr
+
     def add_interrupt_addr(self, addr):
         '''Add the device bus address to the set of devices that have
         raised an interrupt.'''
@@ -61,6 +74,16 @@ class CPU(threading.Thread):
     def restore_registers(self):
         self._registers = self._backup_registers
 
+    # NS - Clear registers 0 - 2 to 0
+    # PC does not change
+    def clear_registers(self):
+        self._registers = {
+            'reg0' : 0,
+            'reg1' : 0,
+            'reg2' : 0,
+            'pc': self._registers['pc']
+            }
+
     def isregister(self, s):
         return s in ('reg0', 'reg1', 'reg2', 'pc')
 
@@ -71,8 +94,54 @@ class CPU(threading.Thread):
         return res
 
     def run(self):
-        '''Overrides run() in thread.  Called by calling start().'''
-        self._run_program()
+        '''Overrides run() in thread.  Called by calling start().
+            NS - Handles both batch and single run modes.'''
+
+        # NS - Batch mode should loop through a list of addresses corresponding to programs to run
+        if self._isBatchMode:
+            # NS - currentListAddr is our addr (index) in the list of program addresses
+            currentListAddr = self._program_list_addr
+            counter = 0
+
+            while True:
+                # NS - Ensure our currentListAddr is valid
+                if not self._ram.is_legal_addr(currentListAddr):
+                    print("ERROR: Illegal Address in RAM: {}".format(currentListAddr))
+                    break
+
+                # NS - Extract a programAddr from the list of addresses
+                programAddr = self._ram[currentListAddr]
+
+                # NS - Ensure our programAddr is also valid
+                if not self._ram.is_legal_addr(programAddr):
+                    print("ERROR: Illegal Address in RAM: {}".format(programAddr))
+                    break
+
+                # NS - 0 indicates the end of our list
+                # Return to single mode and stop executing programs
+                if programAddr == 0:
+                    self._isBatchMode = False
+                    print("All programs have been run.\n")
+                    break
+
+                # NS - Move pc to program start addr and begin executing program
+                else:
+                    self.set_pc(programAddr)
+                    currentListAddr += 1 # NS - Get next program addr
+
+                    # NS - Begin loader
+                    print("\nProcessing [", end="", flush=True)
+
+                    self._run_program()
+                    self.clear_registers()
+
+                    # NS - Finish loader
+                    print("]\nFinished program %d\n" % counter)
+                    counter += 1
+
+        # NS - We only have one program to run
+        else:
+            self._run_program()
         
 
     def _run_program(self):
@@ -83,6 +152,7 @@ class CPU(threading.Thread):
             if not self.parse_instruction(self._ram[self._registers['pc']]):
                 # False means an error occurred or the program ended, so return
                 break
+
             # print CPU state
             if self._debug: print(self)
 
@@ -112,7 +182,11 @@ class CPU(threading.Thread):
         if isinstance(instr, int):
             print("ERROR: Not an instruction: {}".format(instr))
             return False
-            
+
+        # NS - Show loader progress
+        if self._isBatchMode:
+            print("---", end="", flush=True)
+
         instr = instr.replace(",", "")
         words = instr.split()
         instr = words[0]
