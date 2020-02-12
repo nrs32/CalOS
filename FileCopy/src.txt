@@ -1,0 +1,4 @@
+You can copy and paste text by combining the Ctrl key on your keyboard with the C and V keys. 
+Almost any text you can select can be copied using a keyboard shortcut. 
+Click and hold your cursor at the beginning of the text you want to copy, 
+drag your mouse to the end of the text and then release the mouse button to select the text.
