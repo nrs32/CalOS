@@ -1,0 +1,26 @@
+How many bytes of RAM does the virtual machine have by default?
+---> 1024 words, but word size is not defined
+
+What are the registers that the virtual machine has?
+---> reg0, reg1, reg2, pc
+
+What arguments does the instruction JLZ take and what does the instruction do?
+---> jump less than zero: takes a register and destination addr to jump to if the register is < 0
+
+When does the CPU check if an interrupt has occurred?
+---> After parsing the instruction following every DELAY_BETWEEN_INSTRUCTIONS time interval
+
+What does the Monitor instruction S do?
+---> Displays the memory from the starting to ending addr provided
+
+What does the Monitor instruction ! do?
+---> Toggles debugging on or off
+
+Can assembly language files contain comments? How about blank lines?
+---> Both comments and blank lines are allowed, comments are denoted with #
+
+What function is called to write bytes into memory?
+---> _poke_ram which checks for a valid addr in memory and then checks for valid user input before saving bytes into memory.
+
+Do assembly language programs assume they are loaded into memory at certain locations?
+---> Yes, fib is loaded in at location 100, and mult is loaded in at location 20.
