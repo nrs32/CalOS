@@ -11,20 +11,33 @@ using namespace std;
  * 3 March 2020
  */
 class Prompt {
+	// ANSI strings to set text color
+	string setMagenta = "\033[35m";
+    string setCyan = "\033[36m";
+    string setDefault = "\033[0m";
+
 	string currentPrompt;
   	char buff[FILENAME_MAX]; // define buffer of FILENAME_MAX size
 
 	public:
 		Prompt() { // <-- constructor
 			// getcwd system call returns a string of the current working directory
-			// TODO: check for null returned by getcwd which happens on error
-			currentPrompt =  getcwd(buff, FILENAME_MAX);
+			char* cwd = getcwd(buff, FILENAME_MAX);
+
+			// Check for errors from getcwd
+			if (cwd == NULL) {
+				perror("Error: ");
+				exit(-1);
+			} else {
+				currentPrompt = cwd;
+			}
 		}
 
-		string get() { return currentPrompt + "$ "; }
+		// Return prompt with shell name in magenta and directory in cyan
+		string get() { return setMagenta + "SNShell " + setCyan + currentPrompt + setDefault + "\n$ "; }
 };
 
-// TODO: comment out -- used for testing
+// TODO: delete -- used for testing
 // int main() {
 // 	Prompt newPrompt = Prompt();
 // 	cout << newPrompt.get() << "\n";

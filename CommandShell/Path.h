@@ -39,8 +39,14 @@ class Path {
 	public:
 		Path() { // <-- constructor
 			// Get the value of PATH and split the paths at the ';'
-			// TODO: check for null return from getenv
 			char* envVarValue = getenv("PATH");
+
+			// Handle case if PATH does not exist (could this happen?)
+			if (envVarValue == NULL) {
+				cout << "Error: PATH does not exist.\n";
+				exit(-1);
+			}
+
 			char delimeter[2] = ";";
 			directories = split(envVarValue, delimeter);
 		}
@@ -71,26 +77,31 @@ class Path {
 		 * @return a string name of the directory at the given location
 		 * */
 		string getDirectory(int i) const {
-			// TODO: handle invalid index
+
+			// Check for invalid index
+			if (directories.size() < (i + 1) || i < 0) {
+				cout << "Error: Invalid index - no directory found.\n";
+			}
+
 			return directories[i];
 		}
 
-		// TODO: comment out -- used for testing
-		// vector<string> get() { return directories; }
+		// TODO: comment out / delete -- used for testing
+		vector<string> get() { return directories; }
 };
 
-// TODO: comment out -- used for testing
-// int main() {
-// 	Path newPath = Path();
-	
-// 	///////////////////////////////////////////
-// 	vector<string> result = newPath.get();
-// 	for (int i = 0; i < result.size(); i++) {
-// 		cout << result[i] << "\n";
+// TODO: delete -- used for testing
+// int main() {	
+//  Path testPath = Path();
+
+// 	vector<string> testResult = testPath.get();
+// 	for (int i = 0; i < testResult.size() && i < 3; i++) {
+// 		cout << testResult[i] << "\nsize: " << testResult.size() << "\n";
 // 	}
 
-// 	cout << "\npath of IntelliJ: " << newPath.getDirectory(newPath.find("IntelliJ")) << "\n";
-// 	///////////////////////////////////////////
+// 	cout << "\npath of IntelliJ: " << testPath.getDirectory(testPath.find("IntelliJ")) << "\n";
 
+//     cout << "test invalid index: " << testPath.getDirectory(40) << "\n";
+	
 // 	return 0;
 // };

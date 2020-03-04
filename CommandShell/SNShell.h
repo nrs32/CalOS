@@ -16,22 +16,38 @@
  * 4 March 2020
  * */
 class SNShell {
-
 	public:
         // Constructor 
 		SNShell() { }
 
         // Continuously prompt for and handle commands
 		void run() { 
-            // ANSI strings to set text color
-            string setCyan = "\033[36m";
-            string setDefault = "\033[0m";
-
             // Infinite loop
             while (1) {
+	
+                                    ///////////////////////////////////////////
+                                    // // TODO: DELETE THIS!!
+                                    // // PATH TEST
+                                    // Path testPath = Path();
+
+                                    // vector<string> testResult = testPath.get();
+                                    // for (int i = 0; i < testResult.size() && i < 3; i++) {
+                                    //     cout << testResult[i] << "\nsize: " << testResult.size() << "\n";
+                                    // }
+
+                                    // cout << "\npath of IntelliJ: " << testPath.getDirectory(testPath.find("IntelliJ")) << "\n";
+
+                                    // // cout << "test invalid index: " << testPath.getDirectory(40) << "\n";
+
+                                    // // PROMPT TEST
+                                    // Prompt testPrompt = Prompt();
+                                    // cout << testPrompt.get() << "\n";
+                                    ///////////////////////////////////////////
+
+
                 // Print out prompt (in cyan) and wait for user command
                 Prompt newPrompt = Prompt();
-                cout << setCyan + newPrompt.get() + setDefault;
+                cout << newPrompt.get();
                 string command;
                 cin >> command; // TODO: must handle spaces correctly
 
