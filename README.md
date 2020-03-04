@@ -1,3 +1,16 @@
+## Command Shell
+SNShell is a command shell that reads a user command from the keyboard and performs that command on behalf of the user.  
+  
+Supported commands are: `ls`, `ps`, `pwd`, `cd` and `pwd`.  
+
+Command prompt shows SNShell in magenta and current directory path in cyan.  
+  
+**Compile Program**  
+`g++ -g -o snshell snshell.cpp`
+
+**Run Program**  
+`./snshell`  
+  
 ## FileCopy  
 Program in C to copy the contents of one file to another after argument verification.  
   
