@@ -6,7 +6,7 @@ Supported commands are: `ls`, `ps`, `pwd`, `cd` and `pwd`.
 Command prompt shows SNShell in magenta and current directory path in cyan.  
   
 **Compile Program**  
-`g++ -g -o snshell main.cpp SNShell.cpp Path.cpp Prompt.cpp Utils.cpp`  
+`g++ -g -o snshell main.cpp SNShell.cpp Path.cpp Prompt.cpp Utils.cpp CommandLine.cpp`  
 
 **Run Program**  
 `./snshell`  
