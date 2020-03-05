@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include <cstdlib> // for access to getenv
 #include <vector>
-#include <sstream> // for easy string splitting
+#include <string.h> // for strtok
 using namespace std;
 
 /**
