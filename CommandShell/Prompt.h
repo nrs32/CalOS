@@ -20,26 +20,8 @@ class Prompt {
   	char buff[FILENAME_MAX]; // define buffer of FILENAME_MAX size
 
 	public:
-		Prompt() { // <-- constructor
-			// getcwd system call returns a string of the current working directory
-			char* cwd = getcwd(buff, FILENAME_MAX);
-
-			// Check for errors from getcwd
-			if (cwd == NULL) {
-				perror("Error: ");
-				exit(-1);
-			} else {
-				currentPrompt = cwd;
-			}
-		}
+		Prompt();
 
 		// Return prompt with shell name in magenta and directory in cyan
 		string get() { return setMagenta + "SNShell " + setCyan + currentPrompt + setDefault + "\n$ "; }
 };
-
-// TODO: delete -- used for testing
-// int main() {
-// 	Prompt newPrompt = Prompt();
-// 	cout << newPrompt.get() << "\n";
-// 	return 0;
-// };
