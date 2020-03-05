@@ -1,4 +1,4 @@
-#include "commandLine.h"
+#include "CommandLine.h"
 #include <iostream>
 #include <cstdlib>
 #include <string>
@@ -13,13 +13,13 @@ using namespace std;
 /*
 - class to read a command line
 - public methods
-    - commandLine
+    - CommandLine
     -getCommand
     -getArgCount
     -getArgVector
     -noAmpersand
 
-commandLine
+CommandLine
     read command from in
     parse the argument
     build instance variable 
@@ -27,7 +27,7 @@ commandLine
 */
 
 
-commandLine::commandLine(istream& in){
+CommandLine::CommandLine(istream& in){
     // string argument;
     
     // getline(in, argument);
@@ -36,7 +36,7 @@ commandLine::commandLine(istream& in){
     // char* arg[argument.size() + 1];
 	// strcpy(arg, argument.c_str());
 
-    // argv = commandLine::split(arg, space);
+    // argv = CommandLine::split(arg, space);
     // argc = argv.size();
 
     string argument;
@@ -46,28 +46,28 @@ commandLine::commandLine(istream& in){
     memory = (char*) calloc (argument.size(), sizeof(char));
     strcpy(memory, argument.c_str());
 
-    argv = commandLine::split(memory, space);
+    argv = CommandLine::split(memory, space);
 
     //where do you free memory?
 }
 
-char* commandLine::getCommand() const {
+char* CommandLine::getCommand() const {
     return argv[0];
 }
 
-int commandLine::getArgCount() const {
+int CommandLine::getArgCount() const {
     return argc;
 }
 
-char** commandLine::getArgVector() const{
+char** CommandLine::getArgVector() const{
     return argv;
 }
 
-char* commandLine::getArgVector(int i) const{
+char* CommandLine::getArgVector(int i) const{
     return argv[i];
 }
 
-bool commandLine::noAmpersand() const {
+bool CommandLine::noAmpersand() const {
     char* ampersand;
     const char* amp = "$";
 
@@ -82,7 +82,7 @@ bool commandLine::noAmpersand() const {
 }
 
 
-char** commandLine::split(char* str, char* delimeter) {
+char** CommandLine::split(char* str, char* delimeter) {
 		char* token;
 		char** result;
 

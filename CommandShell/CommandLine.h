@@ -7,10 +7,10 @@ using namespace std;
 #ifndef COMMANDLINE_H_
 #define COMMANDLINE_H_
 
-class commandLine {
+class CommandLine {
 
 public:
-    commandLine(istream& in);
+    CommandLine(istream& in);
     char** split(char* str, char* delimeter);
     char* getCommand() const;
     int getArgCount() const;
