@@ -4,13 +4,13 @@
  * @author Nikita Sietsema
  * 4 March 2020
  */
+#include "Utils.h"
 
 #include <iostream>
-#include <unistd.h> // For Linux
-#include <cstdlib>  // for access to getenv
 #include <vector>
-#include <string.h> // for strtok
-#include "Utils.h"
+#include <unistd.h> // For Linux
+#include <cstdlib>  // For access to getenv
+#include <string.h> // For strtok
 using namespace std;
 
 /**

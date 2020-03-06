@@ -6,7 +6,7 @@
 #include <stdio.h> 
 #include <string.h>
 #include <cstring>
-
+#include "Utils.h"
 using namespace std;
 
 
@@ -45,10 +45,7 @@ CommandLine::CommandLine(istream& in){
     getline(in, argument);
     memory = (char*) calloc (argument.size(), sizeof(char));
     strcpy(memory, argument.c_str());
-
-    argv = CommandLine::split(memory, space);
-
-    //where do you free memory?
+    argv = split(memory, space);
 }
 
 char* CommandLine::getCommand() const {
@@ -69,7 +66,7 @@ char* CommandLine::getArgVector(int i) const{
 
 bool CommandLine::noAmpersand() const {
     char* ampersand;
-    const char* amp = "$";
+    const char* amp = "&";
 
     for(int i =0; i < argc; i++){
         ampersand = std::strstr(argv[i], amp);
@@ -81,24 +78,23 @@ bool CommandLine::noAmpersand() const {
     return true;
 }
 
-
 char** CommandLine::split(char* str, char* delimeter) {
-		char* token;
-		char** result;
+    char* token;
+    char** result;
 
-		// call strtok repeatedly to split the string at every delimeter
-		// add each token to result vector<string>
-		token = strtok(str, delimeter);
-        int index = 0;
+    // call strtok repeatedly to split the string at every delimeter
+    // add each token to result vector<string>
+    token = strtok(str, delimeter);
+    int index = 0;
 
 
-		while (token != NULL)
-		 {
-            result[index] = token;
-            token = strtok(NULL, delimeter);
-            index++;
-        }
+    while (token != NULL)
+        {
+        result[index] = token;
+        token = strtok(NULL, delimeter);
+        index++;
+    }
 
-        argc = index; // it is equal to index beause it increments before it exits
-		return result;
-	}
+    argc = index; // it is equal to index beause it increments before it exits
+    return result;
+}

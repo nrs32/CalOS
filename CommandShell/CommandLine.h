@@ -11,18 +11,17 @@ class CommandLine {
 
 public:
     CommandLine(istream& in);
-    char** split(char* str, char* delimeter);
     char* getCommand() const;
     int getArgCount() const;
     char** getArgVector() const;
     char* getArgVector(int i) const;
     bool noAmpersand() const;
+    char** split(char* str, char* delimeter);
 
 private:
     char** argv;
     int argc;
     int size;
-
 };
 
 #endif /* COMMANDLINE_H_ */

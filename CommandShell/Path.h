@@ -10,6 +10,7 @@ using namespace std;
  **/
 class Path {
 	vector<string> directories;
+	void exitOnError(string message) const;
 
 	public:
 		Path();

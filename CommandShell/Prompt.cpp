@@ -4,15 +4,16 @@
  * @author Nikita Sietsema
  * 3 March 2020
  */
+#include "Prompt.h"
 
 #include <iostream>
 #include <unistd.h>
 #include <stdio.h>  // for access to FILENAME_MAX 
-#include <direct.h> // Used for Windows :D
-#include "Prompt.h"
 using namespace std;
 
-Prompt::Prompt() { // <-- constructor
+// Constructor responsible for initializing 
+// the prompt from the current working directory
+Prompt::Prompt() {
     // getcwd system call returns a string of the current working directory
     char* cwd = getcwd(buff, FILENAME_MAX);
 

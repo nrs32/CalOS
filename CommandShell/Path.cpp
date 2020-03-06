@@ -4,31 +4,51 @@
  * @author Nikita Sietsema
  * 3 March 2020
  **/
+#include "Path.h"
+#include "Utils.h" // For split
 
 #include <iostream>
-#include <unistd.h> // For Linux
-#include <cstdlib>  // for access to getenv
 #include <vector>
-#include "Path.h"
-#include "Utils.h"  // For split
+#include <unistd.h>    // For Linux
+#include <cstdlib>     // For access to getenv
+#include <string.h>    // For strcmp
+#include <dirent.h>    // For opendir
+#include <sys/types.h> // For opendir
+#include <errno.h>     // To handle errors from readdir
+
+// Special for windows :D
+#ifdef _WIND32
+#define DELIMETER ";" // Windows
+#else
+#define DELIMETER ":" // Linux
+#endif
+
 using namespace std;
 
-// Path Constructor
-Path::Path() { 
-    // Get the value of PATH and split the paths at the ';'
-    char* envVarValue = getenv("PATH");
+// Constructor responsible for setting the available 
+// directories found in PATH
+Path::Path() {
+    // Get the value of PATH
+    char* path = getenv("PATH");
 
-    // Handle case if PATH does not exist (could this happen?)
-    if (envVarValue == NULL) {
+    // Handle the case that PATH does not exist (could this ever happen?)
+    if (path == NULL) {
         cout << "Error: PATH does not exist.\n";
         exit(-1);
     }
 
-    char delimeter[2] = ";";
-
-    // Use Utils split function
+    // Use Utils split function to split the paths at the DELIMETER
     Utils utils = Utils();
-    directories = utils.split(envVarValue, delimeter);
+    directories = utils.split(path, DELIMETER);
+}
+
+/**
+ * Print perror using message and exit
+ * @param message a specific string to give perror
+ * */
+void Path::exitOnError(string message) const {
+    perror(message.c_str());
+    exit(-1);
 }
 
 /**
@@ -40,11 +60,29 @@ Path::Path() {
 int Path::find(const string& program) const {			
     // look for program and return the index when found
     for (int i = 0; i < directories.size(); i++) {
-        // Check for the program name in the directory name
-        // TODO: this is probably bad, re-write it
-        if (directories[i].find(program) != -1) {
-            return i;
+        DIR* currentDirectory = opendir(directories[i].c_str());
+        dirent * entry; // An entry in the currentDirectory
+
+        // handle possible error from opendir
+        if (currentDirectory == NULL) { exitOnError("Error with opendir: "); }
+
+        // Set errno to 0 so we can see if readdir errored
+        errno = 0;
+
+        while ((entry = readdir(currentDirectory)) != NULL) {
+            // See if we found the program
+            if (!strcmp(entry->d_name, program.c_str())) {
+                int success = closedir(currentDirectory);
+                if (success == -1) { exitOnError("Error with closedir: "); }
+                return i;
+            }
         }
+
+        // Make sure we did not break the while loop because readdir error-ed
+        if (errno != 0) { exitOnError("Error with readdir: "); }
+
+        int success = closedir(currentDirectory);
+        if (success == -1) { exitOnError("Error with closedir: "); }
     }
 
     // We did not find the program, return -1
@@ -61,6 +99,7 @@ string Path::getDirectory(int i) const {
     // Check for invalid index
     if (directories.size() < (i + 1) || i < 0) {
         cout << "Error: Invalid index - no directory found.\n";
+        exit(-1);
     }
 
     return directories[i];

@@ -1,7 +1,6 @@
 #include <iostream>
 #include <unistd.h>
 #include <stdio.h>  // for access to FILENAME_MAX 
-#include <direct.h> // Used for Windows :D
 using namespace std;
 
 /**
@@ -24,4 +23,7 @@ class Prompt {
 
 		// Return prompt with shell name in magenta and directory in cyan
 		string get() { return setMagenta + "SNShell " + setCyan + currentPrompt + setDefault + "\n$ "; }
+
+		// Only return the currentPrompt
+		string get_pwd() { return currentPrompt; }
 };
