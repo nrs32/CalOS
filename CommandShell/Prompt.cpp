@@ -20,7 +20,7 @@ Prompt::Prompt() {
     // Check for errors from getcwd
     if (cwd == NULL) {
         perror("Error: ");
-        exit(-1);
+        exit(-1); // Actually exit and kill program. No way to prompt user.
     } else {
         currentPrompt = cwd;
     }

@@ -11,6 +11,7 @@ class CommandLine {
 
 public:
     CommandLine(istream& in);
+    ~CommandLine();
     char* getCommand() const;
     int getArgCount() const;
     char** getArgVector() const;
@@ -22,6 +23,8 @@ private:
     char** argv;
     int argc;
     int size;
+
+    char* tempStorage; // Use this to allocate memory for argv and deallocate it
 };
 
 #endif /* COMMANDLINE_H_ */

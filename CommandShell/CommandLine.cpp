@@ -38,14 +38,17 @@ CommandLine::CommandLine(istream& in){
 
     // argv = CommandLine::split(arg, space);
     // argc = argv.size();
-
     string argument;
-    char * memory;
     char space[2] = " ";
     getline(in, argument);
-    memory = (char*) calloc (argument.size(), sizeof(char));
-    strcpy(memory, argument.c_str());
-    argv = split(memory, space);
+    if (argument.size() == 0) {
+        cout << "No command provided." << endl;
+        argc = 0;
+    } else {
+        tempStorage = (char*) calloc (argument.size(), sizeof(char));
+        strcpy(tempStorage, argument.c_str());
+        argv = split(tempStorage, space);
+    }
 }
 
 char* CommandLine::getCommand() const {
@@ -56,7 +59,7 @@ int CommandLine::getArgCount() const {
     return argc;
 }
 
-char** CommandLine::getArgVector() const{
+char** CommandLine::getArgVector() const {
     return argv;
 }
 
@@ -95,6 +98,14 @@ char** CommandLine::split(char* str, char* delimeter) {
         index++;
     }
 
+    result[index] = NULL;
+
     argc = index; // it is equal to index beause it increments before it exits
     return result;
+}
+
+CommandLine::~CommandLine() {
+    free(tempStorage);
+    argv = NULL;
+    tempStorage = NULL;
 }

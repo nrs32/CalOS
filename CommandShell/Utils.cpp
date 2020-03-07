@@ -34,3 +34,13 @@ vector<string> Utils::split(char* str, char* delimeter) {
 
     return result;
 };
+
+/**
+ * Print perror using message and then exit
+ * @param message a specific string to give perror
+ * */
+int Utils::handleError(string message, bool shouldExit) const {
+    perror(message.c_str());
+    if (shouldExit) { exit(-1); }
+    return -1;
+}

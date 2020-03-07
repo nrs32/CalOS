@@ -5,7 +5,7 @@
  * 3 March 2020
  **/
 #include "Path.h"
-#include "Utils.h" // For split
+#include "Utils.h" // For split and handleError
 
 #include <iostream>
 #include <vector>
@@ -15,14 +15,6 @@
 #include <dirent.h>    // For opendir
 #include <sys/types.h> // For opendir
 #include <errno.h>     // To handle errors from readdir
-
-// Special for windows :D
-#ifdef _WIND32
-#define DELIMETER ";" // Windows
-#else
-#define DELIMETER ":" // Linux
-#endif
-
 using namespace std;
 
 // Constructor responsible for setting the available 
@@ -34,21 +26,12 @@ Path::Path() {
     // Handle the case that PATH does not exist (could this ever happen?)
     if (path == NULL) {
         cout << "Error: PATH does not exist.\n";
-        exit(-1);
+
+    } else {
+        // Use Utils split function to split the paths at the DELIMETER
+        Utils utils = Utils();
+        directories = utils.split(path, ":");
     }
-
-    // Use Utils split function to split the paths at the DELIMETER
-    Utils utils = Utils();
-    directories = utils.split(path, DELIMETER);
-}
-
-/**
- * Print perror using message and exit
- * @param message a specific string to give perror
- * */
-void Path::exitOnError(string message) const {
-    perror(message.c_str());
-    exit(-1);
 }
 
 /**
@@ -57,14 +40,17 @@ void Path::exitOnError(string message) const {
  * @param program a string of the program name
  * @return the int index of the program if found, and otherwise -1
  * */
-int Path::find(const string& program) const {			
+int Path::find(const string& program) const {	
+    // Use Utils for handleError
+    Utils utils = Utils();
+    
     // look for program and return the index when found
     for (int i = 0; i < directories.size(); i++) {
         DIR* currentDirectory = opendir(directories[i].c_str());
         dirent * entry; // An entry in the currentDirectory
 
         // handle possible error from opendir
-        if (currentDirectory == NULL) { exitOnError("Error with opendir: "); }
+        if (currentDirectory == NULL) { return utils.handleError("Error with opendir: ", false); }
 
         // Set errno to 0 so we can see if readdir errored
         errno = 0;
@@ -73,16 +59,20 @@ int Path::find(const string& program) const {
             // See if we found the program
             if (!strcmp(entry->d_name, program.c_str())) {
                 int success = closedir(currentDirectory);
-                if (success == -1) { exitOnError("Error with closedir: "); }
+
+                // handle possible closedir error
+                if (success == -1) { return utils.handleError("Error with closedir: ", false); }
                 return i;
             }
         }
 
         // Make sure we did not break the while loop because readdir error-ed
-        if (errno != 0) { exitOnError("Error with readdir: "); }
+        if (errno != 0) { return utils.handleError("Error with readdir: ", false); }
 
         int success = closedir(currentDirectory);
-        if (success == -1) { exitOnError("Error with closedir: "); }
+
+        // handle possible closedir error
+        if (success == -1) { return utils.handleError("Error with closedir: ", false); }
     }
 
     // We did not find the program, return -1
@@ -98,8 +88,7 @@ string Path::getDirectory(int i) const {
 
     // Check for invalid index
     if (directories.size() < (i + 1) || i < 0) {
-        cout << "Error: Invalid index - no directory found.\n";
-        exit(-1);
+        return "";
     }
 
     return directories[i];

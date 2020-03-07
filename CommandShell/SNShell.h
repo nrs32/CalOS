@@ -10,7 +10,7 @@
  * */
 class SNShell {
 	void handleCommand();
-	char** findCommand(CommandLine currentCL);
+	void childExecuteCommand(CommandLine CL);
 
 	public:
 		SNShell() {};

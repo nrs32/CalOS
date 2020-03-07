@@ -12,4 +12,5 @@ class Utils {
 	public:
 		Utils() { };
 		vector<string> split(char* str, char* delimeter);
+		int handleError(string message, bool shouldExit) const;
 };
