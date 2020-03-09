@@ -1,3 +1,11 @@
+/**
+ * Class dealing with the command line argument 
+ * 
+ * @author Sebrina Zeleke 
+ * 3 March 2020
+ */
+
+
 #include <iostream>
 #include <cstdlib>
 #include <vector>

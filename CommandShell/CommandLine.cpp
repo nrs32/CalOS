@@ -1,3 +1,10 @@
+/**
+ * Class dealing with the command line argument 
+ * 
+ * @author Sebrina Zeleke 
+ * 3 March 2020
+ */
+
 #include "CommandLine.h"
 #include <iostream>
 #include <cstdlib>
@@ -10,23 +17,10 @@
 using namespace std;
 
 
-/*
-- class to read a command line
-- public methods
-    - CommandLine
-    -getCommand
-    -getArgCount
-    -getArgVector
-    -noAmpersand
-
-CommandLine
-    read command from in
-    parse the argument
-    build instance variable 
-
-*/
-
-
+/**
+ * Explicit constructor for CommandLine 
+ * @param istream& in
+ * */
 CommandLine::CommandLine(istream& in){
     string argument;
     char space[2] = " ";
@@ -59,26 +53,57 @@ CommandLine::CommandLine(istream& in){
     argv = split(tempStorage, space);
 }
 
+/**
+ * Get the command from a command line  
+ * @param none
+ * @return command
+ * */
 char* CommandLine::getCommand() const {
     return argv[0];
 }
 
+/**
+ * Get the number of argument   
+ * @param none
+ * @return argc
+ * */
 int CommandLine::getArgCount() const {
     return argc;
 }
 
+/**
+ * Get the argument vector
+ * @param none
+ * @return argv
+ * */
 char** CommandLine::getArgVector() const {
     return argv;
 }
 
+/**
+ * Get the command from a command line of index i 
+ * @param none
+ * @return argv[i]
+ * */
 char* CommandLine::getArgVector(int i) const{
     return argv[i];
 }
 
+/**
+ * Check if there an ampersand   
+ * @param none
+ * @return true if there is no ampersand 
+ * */
 bool CommandLine::noAmpersand() const {
     return !hasAmpersand;
 }
 
+
+/**
+ * Split a given argument with delimeter   
+ * @param none
+ * @return a char** that is the splitted argument 
+ * */
 char** CommandLine::split(char* str, char* delimeter) {
     char* token;
     char** result;
@@ -102,6 +127,9 @@ char** CommandLine::split(char* str, char* delimeter) {
     return result;
 }
 
+/**
+ * Destructor   
+ * */
 CommandLine::~CommandLine() {
     // free(tempStorage);
     // argv = NULL;
