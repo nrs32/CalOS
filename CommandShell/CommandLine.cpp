@@ -49,7 +49,7 @@ CommandLine::CommandLine(istream& in){
     }
 
     tempStorage = (char*) calloc (argSize, sizeof(char));
-    strcpy(tempStorage, argument.c_str());
+    tempStorage = argument.c_str();
     argv = split(tempStorage, space);
 }
 
@@ -82,7 +82,7 @@ char** CommandLine::getArgVector() const {
 
 /**
  * Get the command from a command line of index i 
- * @param none
+ * @param int i
  * @return argv[i]
  * */
 char* CommandLine::getArgVector(int i) const{
@@ -101,7 +101,8 @@ bool CommandLine::noAmpersand() const {
 
 /**
  * Split a given argument with delimeter   
- * @param none
+ * @param char* str, 
+ * @param char* delimeter
  * @return a char** that is the splitted argument 
  * */
 char** CommandLine::split(char* str, char* delimeter) {
@@ -109,7 +110,6 @@ char** CommandLine::split(char* str, char* delimeter) {
     char** result;
 
     // call strtok repeatedly to split the string at every delimeter
-    // add each token to result vector<string>
     token = strtok(str, delimeter);
     int index = 0;
 
