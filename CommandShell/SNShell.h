@@ -1,4 +1,5 @@
 #include "CommandLine.h"
+#include "Path.h"
 /**
  * SNShell is a command shell that reads a user command from the keyboard 
  * and performs that command on behalf of the user
@@ -10,8 +11,8 @@
  * 4 March 2020
  * */
 class SNShell {
-	void handleCommand();
-	void childExecuteCommand(CommandLine CL);
+	void handleCommand(Path path);
+	void childExecuteCommand(CommandLine CL, Path path);
 	void handleCd(CommandLine CL);
 
 	public:

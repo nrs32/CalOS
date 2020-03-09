@@ -22,6 +22,7 @@ using namespace std;
 Path::Path() {
     // Get the value of PATH
     char* path = getenv("PATH");
+    perror("PATH DNE error");
 
     // Handle the case that PATH does not exist (could this ever happen?)
     if (path == NULL) {

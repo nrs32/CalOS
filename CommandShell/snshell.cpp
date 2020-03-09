@@ -10,7 +10,6 @@
  * */
 
 // Give us access to our other classes
-#include "Path.h"
 #include "Prompt.h"
 #include "SNShell.h"
 #include "CommandLine.h"
@@ -26,19 +25,21 @@
 #include <errno.h>     // To reset errno
 
 // Continuously prompt for and handle commands
-void SNShell::run() { 
+void SNShell::run() {
+    Path path = Path();
+
     // Infinite loop
     while (1) {
         // Print out prompt
         Prompt newPrompt = Prompt();
         cout << newPrompt.get();
 
-        handleCommand();
+        handleCommand(path);
     }
 }
 
 // Determine what command we got and call the handler
-void SNShell::handleCommand() {
+void SNShell::handleCommand(Path path) {
     CommandLine CL = CommandLine(cin);
     char* command = CL.getCommand();
 
@@ -65,7 +66,7 @@ void SNShell::handleCommand() {
 
             // This is the child thread
             } else if (pid == 0) {
-                childExecuteCommand(CL);
+                childExecuteCommand(CL, path);
             }
         }
     }
@@ -95,7 +96,7 @@ void SNShell::handleCd(CommandLine CL) {
  * Function for the child thread to execute the given command
  * @param CL the current commandLine being used
  * */
-void SNShell::childExecuteCommand(CommandLine CL) {
+void SNShell::childExecuteCommand(CommandLine CL, Path path) {
     char* command = CL.getCommand();
     Utils utils = Utils(); // used for errors
 
@@ -114,7 +115,6 @@ void SNShell::childExecuteCommand(CommandLine CL) {
     // Use execve to handle built in commands and their errors
     // (commands like: ls,cat, ps, mkdir, etc.)
     } else {
-        Path path = Path();
         string commandPath = path.getDirectory(path.find(command)) + "/" + command;
         execve(commandPath.c_str(), CL.getArgVector(), NULL);
         utils.handleError("Error", true);
