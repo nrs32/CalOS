@@ -50,7 +50,7 @@ int Path::find(const string& program) const {
         dirent * entry; // An entry in the currentDirectory
 
         // handle possible error from opendir
-        if (currentDirectory == NULL) { return utils.handleError("Error with opendir: ", false); }
+        if (currentDirectory == NULL) { return utils.handleError("Error with opendir", false); }
 
         // Set errno to 0 so we can see if readdir errored
         errno = 0;
@@ -61,18 +61,18 @@ int Path::find(const string& program) const {
                 int success = closedir(currentDirectory);
 
                 // handle possible closedir error
-                if (success == -1) { return utils.handleError("Error with closedir: ", false); }
+                if (success == -1) { return utils.handleError("Error with closedir", false); }
                 return i;
             }
         }
 
         // Make sure we did not break the while loop because readdir error-ed
-        if (errno != 0) { return utils.handleError("Error with readdir: ", false); }
+        if (errno != 0) { return utils.handleError("Error with readdir", false); }
 
         int success = closedir(currentDirectory);
 
         // handle possible closedir error
-        if (success == -1) { return utils.handleError("Error with closedir: ", false); }
+        if (success == -1) { return utils.handleError("Error with closedir", false); }
     }
 
     // We did not find the program, return -1

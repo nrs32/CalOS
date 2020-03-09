@@ -17,14 +17,15 @@ public:
     char** getArgVector() const;
     char* getArgVector(int i) const;
     bool noAmpersand() const;
-    char** split(char* str, char* delimeter);
 
 private:
     char** argv;
     int argc;
     int size;
-
+    bool hasAmpersand = false;
     char* tempStorage; // Use this to allocate memory for argv and deallocate it
+    char** split(char* str, char* delimeter);
+
 };
 
 #endif /* COMMANDLINE_H_ */

@@ -28,27 +28,35 @@ CommandLine
 
 
 CommandLine::CommandLine(istream& in){
-    // string argument;
-    
-    // getline(in, argument);
-    // char space[2] = " ";
-
-    // char* arg[argument.size() + 1];
-	// strcpy(arg, argument.c_str());
-
-    // argv = CommandLine::split(arg, space);
-    // argc = argv.size();
     string argument;
     char space[2] = " ";
     getline(in, argument);
-    if (argument.size() == 0) {
+    int argSize = argument.size();
+
+    if (argSize == 0) {
         cout << "No command provided." << endl;
         argc = 0;
+
     } else {
-        tempStorage = (char*) calloc (argument.size(), sizeof(char));
-        strcpy(tempStorage, argument.c_str());
-        argv = split(tempStorage, space);
+        char lastArgChar[2] = { argument[argSize -1] };
+
+        // Check for an & in the argument. 
+        if (!strcmp(lastArgChar, "&")) {
+            if (argSize >= 2) {
+                // Make sure & follows a space and is not part of fileName
+                char secondtoLast[2] = { argument[argSize -2] };
+                if (!strcmp(secondtoLast, space)) {
+                    // If there is an &, remove it and set hasAmpersand.
+                    hasAmpersand = true;
+                    argument = argument.substr(0, argSize -1);
+                }
+            }
+        }
     }
+
+    tempStorage = (char*) calloc (argSize, sizeof(char));
+    strcpy(tempStorage, argument.c_str());
+    argv = split(tempStorage, space);
 }
 
 char* CommandLine::getCommand() const {
@@ -68,17 +76,7 @@ char* CommandLine::getArgVector(int i) const{
 }
 
 bool CommandLine::noAmpersand() const {
-    char* ampersand;
-    const char* amp = "&";
-
-    for(int i =0; i < argc; i++){
-        ampersand = std::strstr(argv[i], amp);
-        if(ampersand != NULL){
-            return false;
-        }
-    }
-
-    return true;
+    return !hasAmpersand;
 }
 
 char** CommandLine::split(char* str, char* delimeter) {
@@ -97,7 +95,7 @@ char** CommandLine::split(char* str, char* delimeter) {
         token = strtok(NULL, delimeter);
         index++;
     }
-
+    
     result[index] = NULL;
 
     argc = index; // it is equal to index beause it increments before it exits
@@ -105,7 +103,7 @@ char** CommandLine::split(char* str, char* delimeter) {
 }
 
 CommandLine::~CommandLine() {
-    free(tempStorage);
-    argv = NULL;
-    tempStorage = NULL;
+    // free(tempStorage);
+    // argv = NULL;
+    // tempStorage = NULL;
 }
