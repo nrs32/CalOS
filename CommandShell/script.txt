@@ -1,0 +1,499 @@
+Script started on 2020-03-09 20:07:14-0400
+]0;nrs32@maroon11: ~/cs232/homework04/OS-Projects/CommandShell[01;32mnrs32@maroon11[00m:[01;34m~/cs232/homework04/OS-Projects/CommandShell[00m$ ./snshell
+[35mSNShell [36m/home/nrs32/cs232/homework04/OS-Projects/CommandShell[0m
+$ ls
+CommandLine.cpp  Path.h      SNShell.h	grading.txt  snshell
+CommandLine.h	 Prompt.cpp  Utils.cpp	main.cpp     snshell.cpp
+Path.cpp	 Prompt.h    Utils.h	script.txt   snshell.exe
+[35mSNShell [36m/home/nrs32/cs232/homework04/OS-Projects/CommandShell[0m
+$ cd ..
+[35mSNShell [36m/home/nrs32/cs232/homework04/OS-Projects[0m
+$ pwd
+/home/nrs32/cs232/homework04/OS-Projects
+[35mSNShell [36m/home/nrs32/cs232/homework04/OS-Projects[0m
+$ ls -l /home/cs/
+total 0
+drwxrwsr-x  2 root cs-rights-facstf  2 Jul 24  2019 101
+drwxrwsr-x  6 root cs-rights-facstf 13 Aug 28  2019 106
+drwxrwsr-x  2 root cs-rights-facstf  9 Jan 30 14:56 108
+drwxrwsr-x+ 7 root cs-rights-facstf 15 Feb 13 16:14 112
+drwxrwsr-x  2 root cs-rights-facstf  3 Jan 23  2019 202
+drwxrwsr-x  2 root cs-rights-facstf  4 Jan 23  2019 212
+drwxrwsr-x  4 root cs-rights-facstf  4 Jan 23  2019 214
+drwxrwsr-x  6 root cs-rights-facstf  9 Feb 17 08:52 232
+drwxrwsr-x  2 root cs-rights-facstf  3 Jan 23  2019 262
+drwxrwsr-x  2 root cs-rights-facstf  1 Jan 23  2019 300
+drwxrwsr-x  2 root cs-rights-facstf  1 Jan 23  2019 312
+drwxrwsr-x  5 root cs-rights-facstf  3 Aug 28  2019 332
+drwxrwsr-x  2 root cs-rights-facstf  2 Jan 23  2019 336
+drwxrwsr-x  2 root cs-rights-facstf  1 Jan 23  2019 337
+drwxrwsr-x  2 root cs-rights-facstf  1 Jan 23  2019 342
+drwxrwsr-x  2 root cs-rights-facstf  1 Jul 24  2019 344
+drwxrwsr-x  2 root cs-rights-facstf  1 Jul 24  2019 352
+drwxrwsr-x  2 root cs-rights-facstf  1 Jan 23  2019 364
+drwxrwsr-x  5 root cs-rights-facstf  9 Nov  1 14:00 374
+drwxrwsr-x  2 root cs-rights-facstf  0 Jan 23  2019 384
+drwxrwsr-x  2 root cs-rights-facstf  0 Jan 23  2019 390
+drwxrwsr-x  2 root cs-rights-facstf  0 Jan 23  2019 394
+drwxrwsr-x  2 root cs-rights-facstf  0 Jan 23  2019 398
+drwxrwxr-x  3 ka37 ka37              3 Dec  4 09:03 data202
+drwxrwsr-x  3 root cs-rights-facstf  1 May 17  2018 seniorprojects
+drwxrwsr-x  3 root cs-rights-facstf  2 Jan 23  2019 w61
+[35mSNShell [36m/home/nrs32/cs232/homework04/OS-Projects[0m
+$ pwd
+/home/nrs32/cs232/homework04/OS-Projects
+[35mSNShell [36m/home/nrs32/cs232/homework04/OS-Projects[0m
+$ ps -ax &
+[35mSNShell [36m/home/nrs32/cs232/homework04/OS-Projects[0m
+$   PID TTY      STAT   TIME COMMAND
+    1 ?        Ss     0:21 /sbin/init nomdmonddf nomdmonisw
+    2 ?        S      0:00 [kthreadd]
+    3 ?        I<     0:00 [rcu_gp]
+    4 ?        I<     0:00 [rcu_par_gp]
+    6 ?        I<     0:00 [kworker/0:0H-kb]
+    9 ?        I<     0:00 [mm_percpu_wq]
+   10 ?        S      0:00 [ksoftirqd/0]
+   11 ?        I      0:47 [rcu_sched]
+   12 ?        S      0:00 [migration/0]
+   13 ?        S      0:00 [idle_inject/0]
+   14 ?        S      0:00 [cpuhp/0]
+   15 ?        S      0:00 [cpuhp/1]
+   16 ?        S      0:00 [idle_inject/1]
+   17 ?        S      0:00 [migration/1]
+   18 ?        S      0:00 [ksoftirqd/1]
+   20 ?        I<     0:00 [kworker/1:0H-kb]
+   21 ?        S      0:00 [cpuhp/2]
+   22 ?        S      0:00 [idle_inject/2]
+   23 ?        S      0:00 [migration/2]
+   24 ?        S      0:00 [ksoftirqd/2]
+   26 ?        I<     0:00 [kworker/2:0H-kb]
+   27 ?        S      0:00 [cpuhp/3]
+   28 ?        S      0:00 [idle_inject/3]
+   29 ?        S      0:00 [migration/3]
+   30 ?        S      0:00 [ksoftirqd/3]
+   32 ?        I<     0:00 [kworker/3:0H-kb]
+   33 ?        S      0:00 [cpuhp/4]
+   34 ?        S      0:00 [idle_inject/4]
+   35 ?        S      0:00 [migration/4]
+   36 ?        S      0:00 [ksoftirqd/4]
+   38 ?        I<     0:00 [kworker/4:0H-kb]
+   39 ?        S      0:00 [cpuhp/5]
+   40 ?        S      0:00 [idle_inject/5]
+   41 ?        S      0:00 [migration/5]
+   42 ?        S      0:00 [ksoftirqd/5]
+   44 ?        I<     0:00 [kworker/5:0H-kb]
+   45 ?        S      0:00 [kdevtmpfs]
+   46 ?        I<     0:00 [netns]
+   47 ?        S      0:00 [rcu_tasks_kthre]
+   48 ?        S      0:00 [kauditd]
+   49 ?        S      0:00 [khungtaskd]
+   50 ?        S      0:00 [oom_reaper]
+   51 ?        I<     0:00 [writeback]
+   52 ?        S      0:00 [kcompactd0]
+   53 ?        SN     0:00 [ksmd]
+   54 ?        SN     0:00 [khugepaged]
+  148 ?        I<     0:00 [kintegrityd]
+  149 ?        I<     0:00 [kblockd]
+  150 ?        I<     0:00 [blkcg_punt_bio]
+  153 ?        I<     0:00 [tpm_dev_wq]
+  154 ?        I<     0:00 [ata_sff]
+  155 ?        I<     0:00 [md]
+  156 ?        I<     0:00 [edac-poller]
+  157 ?        I<     0:00 [devfreq_wq]
+  158 ?        S      0:00 [watchdogd]
+  162 ?        S      0:00 [kswapd0]
+  163 ?        I<     0:00 [kworker/u13:0]
+  164 ?        S      0:00 [ecryptfs-kthrea]
+  167 ?        I<     0:00 [kthrotld]
+  168 ?        I<     0:00 [acpi_thermal_pm]
+  172 ?        I<     0:00 [ipv6_addrconf]
+  183 ?        I<     0:00 [kstrp]
+  202 ?        I<     0:00 [charger_manager]
+  262 ?        I<     0:00 [nvme-wq]
+  263 ?        I<     0:00 [nvme-reset-wq]
+  265 ?        I<     0:00 [nvme-delete-wq]
+  270 ?        S      0:00 [scsi_eh_0]
+  271 ?        I<     0:00 [scsi_tmf_0]
+  272 ?        S      0:00 [scsi_eh_1]
+  273 ?        I<     0:00 [scsi_tmf_1]
+  274 ?        S      0:00 [scsi_eh_2]
+  275 ?        I<     0:00 [scsi_tmf_2]
+  276 ?        S      0:00 [scsi_eh_3]
+  277 ?        I<     0:00 [scsi_tmf_3]
+  278 ?        S      0:00 [scsi_eh_4]
+  279 ?        I<     0:00 [scsi_tmf_4]
+  280 ?        S      0:00 [scsi_eh_5]
+  281 ?        I<     0:00 [scsi_tmf_5]
+  285 ?        I<     0:00 [e1000e]
+  304 ?        I<     0:00 [kworker/5:1H-kb]
+  306 ?        S      0:01 [jbd2/nvme0n1p5-]
+  307 ?        I<     0:00 [ext4-rsv-conver]
+  343 ?        I<     0:00 [kworker/1:1H-kb]
+  367 ?        I<     0:00 [kworker/4:1H-kb]
+  368 ?        I<     0:00 [kworker/2:1H-kb]
+  371 ?        I<     0:00 [kworker/0:1H-kb]
+  376 ?        S<s    0:05 /lib/systemd/systemd-journald
+  382 ?        I<     0:00 [kworker/3:1H-kb]
+  387 ?        Ss     0:00 /lib/systemd/systemd-udevd
+  390 ?        S<     0:00 [loop0]
+  427 ?        S<     0:00 [loop1]
+  440 ?        S<     0:00 [loop2]
+  458 ?        S<     0:00 [loop3]
+  471 ?        S<     0:00 [loop4]
+  502 ?        S      0:00 [irq/133-mei_me]
+  512 ?        Ss     0:02 /lib/systemd/systemd-networkd
+  552 ?        S<     0:00 [loop5]
+  575 ?        S<     0:00 [loop6]
+  585 ?        S<     0:00 [loop7]
+  596 ?        I<     0:00 [cryptd]
+  607 ?        S<     0:00 [loop8]
+  612 ?        S      0:00 [nv_queue]
+  613 ?        S      0:00 [nv_queue]
+  676 ?        Ss     0:00 /lib/systemd/systemd-resolved
+  706 ?        Ss     0:00 /usr/sbin/sssd -i --logger=files
+  710 ?        S<     0:00 [loop9]
+  722 ?        S<     0:06 /usr/sbin/atopacctd
+  726 ?        Ssl    0:00 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-s
+  727 ?        Ss     0:28 /usr/sbin/rngd -f
+  734 ?        Ss     0:00 /usr/sbin/atd -f
+  741 ?        Ss     0:08 avahi-daemon: running [maroon11.local]
+  745 ?        Ssl    0:00 /usr/lib/udisks2/udisksd
+  763 ?        S<     0:00 [loop10]
+  764 ?        S<     0:00 [loop11]
+  765 ?        Ss     0:00 /usr/sbin/cron -f
+  768 ?        Ss     0:02 /usr/sbin/acpid
+  769 ?        S      0:00 [nvidia-modeset/]
+  770 ?        S      0:00 [nvidia-modeset/]
+  771 ?        Ssl    0:16 /usr/sbin/irqbalance --foreground
+  781 ?        S      0:00 avahi-daemon: chroot helper
+  786 ?        Ssl    0:02 /usr/sbin/thermald --no-daemon --dbus-enable
+  788 ?        Ss     0:04 /usr/bin/dbus-daemon --system --address=systemd: --no
+  804 ?        S<     0:00 [loop12]
+  806 ?        Ss     0:00 /sbin/wpa_supplicant -u -s -O /run/wpa_supplicant
+  807 ?        Ssl    0:03 /usr/sbin/NetworkManager --no-daemon
+  808 ?        S<     0:00 [loop13]
+  820 ?        S      0:27 /usr/lib/x86_64-linux-gnu/sssd/sssd_be --domain AD.CA
+  825 ?        S<     0:00 [loop14]
+  832 ?        S      0:06 /usr/lib/postgresql/10/bin/postgres -D /var/lib/postg
+  834 ?        Ssl    0:01 /usr/lib/policykit-1/polkitd --no-debug
+  840 ?        S<     0:00 [loop15]
+  846 ?        S<     0:00 [loop16]
+  850 ?        S      0:08 /usr/lib/x86_64-linux-gnu/sssd/sssd_nss --uid 0 --gid
+  851 ?        S      0:01 /usr/lib/x86_64-linux-gnu/sssd/sssd_pam --uid 0 --gid
+  853 ?        S      0:01 /usr/lib/x86_64-linux-gnu/sssd/sssd_pac --uid 0 --gid
+  873 ?        Ssl    0:08 /opt/puppetlabs/puppet/bin/ruby /opt/puppetlabs/puppe
+  885 ?        Ss     0:13 /usr/bin/perl /usr/local/scripts/computerinfodaemon.p
+  888 ?        Ssl    0:09 /usr/sbin/ntpd -p /var/run/ntpd.pid -g -u 107:111
+  893 ?        Ss     0:00 /usr/sbin/sshd -D
+  905 ?        Ss     0:01 /lib/systemd/systemd-logind
+  906 ?        Ssl    0:03 /usr/lib/accountsservice/accounts-daemon
+  914 ?        S<     0:00 [loop17]
+  915 ?        S      0:00 [UVM global queu]
+  916 ?        S      0:00 [UVM deferred re]
+  917 ?        S      0:00 [UVM Tools Event]
+  919 ?        S<     0:00 [loop18]
+  921 ?        Ssl    0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unatt
+  923 ?        Ssl    0:00 /usr/lib/colord/colord
+  926 ?        I<     0:00 [iprt-VBoxWQueue]
+  929 ?        Ss     0:00 postgres: 10/main: checkpointer process   
+  930 ?        Ss     0:02 postgres: 10/main: writer process   
+  931 ?        Ss     0:02 postgres: 10/main: wal writer process   
+  932 ?        Ss     0:01 postgres: 10/main: autovacuum launcher process   
+  933 ?        Ss     0:03 postgres: 10/main: stats collector process   
+  934 ?        Ss     0:00 postgres: 10/main: bgworker: logical replication laun
+  943 ?        S<     0:00 [loop19]
+  950 ?        S      0:00 [iprt-VBoxTscThr]
+ 1003 ?        S<     0:00 [loop20]
+ 1004 ?        S<     0:00 [loop21]
+ 1006 ?        S<     0:00 [loop22]
+ 1009 ?        S<     0:00 [loop23]
+ 1021 ?        S<     0:00 [loop24]
+ 1026 ?        S<     0:00 [loop25]
+ 1027 ?        S<     0:00 [loop26]
+ 1030 ?        S<     0:00 [loop27]
+ 1032 ?        Ss     0:00 /usr/bin/nvidia-persistenced --user nvidia-persistenc
+ 1037 ?        S<     0:00 [loop28]
+ 1039 ?        S<     0:00 [loop29]
+ 1040 ?        S<     0:00 [loop30]
+ 1041 ?        S<     0:00 [loop31]
+ 1043 ?        S<     0:00 [loop32]
+ 1048 ?        Ssl    0:20 /usr/lib/snapd/snapd
+ 2290 ?        I      0:05 [kworker/3:3-mm_]
+ 2392 ?        I      0:02 [kworker/0:1-eve]
+ 2550 ?        Ss     0:07 /usr/sbin/inetd
+ 2554 ?        Ssl    0:00 /usr/bin/whoopsie -f
+ 2596 ?        I<     0:00 [ceph-msgr]
+ 2620 ?        I<     0:00 [ceph-watch-noti]
+ 2621 ?        I<     0:00 [ceph-completion]
+ 2666 ?        Sl     0:00 /usr/bin/mono /usr/lib/mono/4.5/xsp4.exe --port 8084 
+ 2670 ?        Ss     0:04 /usr/sbin/kerneloops --test
+ 2673 ?        Ss     0:04 /usr/sbin/kerneloops
+ 2680 ?        Ssl    0:00 /usr/bin/sddm
+ 2700 ?        I      0:00 [kworker/3:1-cgr]
+ 2752 ?        Ss     0:00 /usr/lib/postfix/sbin/master -w
+ 2754 ?        S      0:00 qmgr -l -t fifo -u
+ 2765 ?        Ssl    0:01 /usr/lib/packagekit/packagekitd
+ 2846 ?        S      0:00 pickup -l -t fifo -u
+ 2918 ?        Ssl    0:01 /usr/sbin/rsyslogd -n
+ 2948 ?        I      0:01 [kworker/1:2-eve]
+ 5245 ?        S      0:00 /usr/lib/x86_64-linux-gnu/sddm/sddm-helper --socket /
+ 5247 ?        Ss     0:00 /lib/systemd/systemd --user
+ 5248 ?        S      0:00 (sd-pam)
+ 5262 ?        Sl     0:01 /usr/bin/gnome-keyring-daemon --daemonize --login
+ 5266 ?        Sl     0:03 /usr/bin/kwalletd5 --pam-login 19 3
+ 5267 ?        S      0:00 /bin/sh /etc/xdg/xfce4/xinitrc -- /etc/X11/xinit/xser
+ 5291 ?        Ss     0:10 /usr/bin/dbus-daemon --session --address=systemd: --n
+ 5346 ?        Ss     0:00 /usr/bin/ssh-agent /usr/bin/im-launch startxfce4
+ 5364 ?        Sl     0:00 xfce4-session
+ 5368 ?        S      0:00 /usr/lib/x86_64-linux-gnu/xfce4/xfconf/xfconfd
+ 5375 ?        S      0:41 xfwm4 --replace
+ 5379 ?        Sl     0:08 xfce4-panel
+ 5381 ?        Sl     0:02 Thunar --daemon
+ 5383 ?        Sl     0:04 xfdesktop
+ 5385 ?        Sl     0:00 /usr/lib/policykit-1-gnome/polkit-gnome-authenticatio
+ 5387 ?        Ssl    0:02 xfsettingsd
+ 5391 ?        Sl     0:00 nm-applet
+ 5394 ?        Sl     0:00 /usr/bin/python3 /usr/share/system-config-printer/app
+ 5415 ?        Sl     0:00 update-notifier
+ 5417 ?        Sl     0:00 /usr/bin/python3 /usr/bin/blueman-applet
+ 5419 ?        Sl     0:00 light-locker
+ 5424 ?        S      0:07 xscreensaver -no-splash
+ 5428 ?        Ssl    0:01 xfce4-power-manager
+ 5430 ?        Sl     0:00 /usr/lib/dconf/dconf-service
+ 5436 ?        Ssl    0:00 /usr/lib/at-spi2-core/at-spi-bus-launcher
+ 5441 ?        S      0:01 /usr/bin/dbus-daemon --config-file=/usr/share/default
+ 5444 ?        S<l    0:01 /usr/bin/pulseaudio --start --log-target=syslog
+ 5446 ?        Sl     0:06 /usr/lib/at-spi2-core/at-spi2-registryd --use-gnome-s
+ 5454 ?        Ssl    0:00 /usr/lib/gvfs/gvfsd
+ 5461 ?        S      0:00 /usr/lib/x86_64-linux-gnu/xfce4/panel/wrapper-1.0 /us
+ 5463 ?        Sl     0:03 /usr/lib/x86_64-linux-gnu/xfce4/panel/wrapper-2.0 /us
+ 5468 ?        Ssl    0:00 /usr/lib/x86_64-linux-gnu/xfce4/notifyd/xfce4-notifyd
+ 5469 ?        Sl     0:00 /usr/lib/gvfs/gvfsd-fuse /run/user/344791/gvfs -f -o 
+ 5495 ?        Sl     0:00 /usr/lib/x86_64-linux-gnu/xfce4/panel/wrapper-2.0 /us
+ 5498 ?        Sl     0:00 /usr/lib/x86_64-linux-gnu/xfce4/panel/wrapper-2.0 /us
+ 5502 ?        Sl     0:00 /usr/lib/x86_64-linux-gnu/xfce4/panel/wrapper-2.0 /us
+ 5503 ?        Sl     0:00 /usr/lib/x86_64-linux-gnu/xfce4/panel/wrapper-2.0 /us
+ 5510 ?        Sl     0:25 /usr/lib/x86_64-linux-gnu/xfce4/panel/wrapper-2.0 /us
+ 5528 ?        Ssl    0:00 /usr/lib/x86_64-linux-gnu/indicator-messages/indicato
+ 5535 ?        Ssl    0:00 /usr/lib/gvfs/gvfs-udisks2-volume-monitor
+ 5539 ?        Ssl    0:00 /usr/lib/gvfs/gvfs-gphoto2-volume-monitor
+ 5543 ?        Ssl    0:00 /usr/lib/gvfs/gvfs-mtp-volume-monitor
+ 5547 ?        Ssl    0:00 /usr/lib/gvfs/gvfs-goa-volume-monitor
+ 5551 ?        Ssl    0:00 /usr/lib/gvfs/gvfs-afc-volume-monitor
+ 5634 ?        Ssl    3:32 /snap/code/25/usr/share/code/code --force-user-env --
+ 5636 ?        S      0:00 /snap/code/25/usr/share/code/code --type=zygote --no-
+ 5656 ?        Sl     7:23 /snap/code/25/usr/share/code/code --type=gpu-process 
+ 5674 ?        SLl   19:50 /snap/code/25/usr/share/code/code --type=renderer --d
+ 5738 ?        Sl     2:10 /snap/code/25/usr/share/code/code --inspect-port=0 /s
+ 5753 ?        Sl     0:04 /snap/code/25/usr/share/code/code /snap/code/25/usr/s
+ 5787 ?        Sl     5:40 /home/nrs32/.vscode/extensions/ms-vscode.cpptools-0.2
+ 5835 ?        Sl     0:13 /snap/code/25/usr/share/code/code --type=renderer --d
+ 5892 ?        Ss     0:00 /usr/lib/bluetooth/obexd
+ 6811 ?        Ss     0:00 /lib/systemd/systemd --user
+ 6812 ?        S      0:00 (sd-pam)
+ 6857 ?        Ss     0:00 /usr/bin/dbus-daemon --session --address=systemd: --n
+ 6988 ?        S      0:00 /usr/lib/x86_64-linux-gnu/xfce4/xfconf/xfconfd
+ 7018 ?        Sl     0:00 /usr/bin/python3 /usr/share/system-config-printer/app
+ 7042 ?        Ssl    0:00 /usr/lib/at-spi2-core/at-spi-bus-launcher
+ 7050 ?        Sl     0:00 /usr/lib/dconf/dconf-service
+ 7058 ?        S      0:00 /usr/bin/dbus-daemon --config-file=/usr/share/default
+ 7061 ?        Ssl    0:00 /usr/lib/upower/upowerd
+ 7063 ?        Ssl    0:00 /usr/lib/gvfs/gvfsd
+ 7096 ?        Sl     0:00 /usr/lib/gvfs/gvfsd-fuse /run/user/350632/gvfs -f -o 
+ 7097 ?        SNsl   0:02 /usr/lib/rtkit/rtkit-daemon
+ 7175 ?        Ssl    0:00 /usr/lib/gvfs/gvfs-udisks2-volume-monitor
+ 7190 ?        Ssl    0:00 /usr/lib/gvfs/gvfs-gphoto2-volume-monitor
+ 7194 ?        Ssl    0:00 /usr/lib/gvfs/gvfs-mtp-volume-monitor
+ 7198 ?        Ssl    0:00 /usr/lib/gvfs/gvfs-goa-volume-monitor
+ 7202 ?        Ssl    0:00 /usr/lib/gvfs/gvfs-afc-volume-monitor
+ 7210 ?        Sl     0:00 /usr/lib/gvfs/gvfsd-trash --spawner :1.24 /org/gtk/gv
+ 7258 ?        Ssl    0:00 /usr/lib/gvfs/gvfsd-metadata
+ 7281 ?        Ss     0:00 /usr/lib/bluetooth/obexd
+ 7535 ?        I      0:00 [kworker/4:2-mm_]
+ 7783 ?        I      0:01 [kworker/u12:1-e]
+ 7939 ?        I      0:19 [kworker/5:0-eve]
+ 7943 ?        Sl     0:06 /usr/lib/firefox/firefox -contentproc -childID 25 -is
+ 8021 ?        Sl     0:00 /usr/bin/python3 /usr/share/system-config-printer/app
+ 8054 ?        Sl     0:06 /usr/bin/xfce4-terminal
+ 8058 pts/0    Ss     0:00 bash
+ 8223 ?        Sl     0:42 /usr/lib/firefox/firefox -contentproc -childID 26 -is
+ 8285 ?        Sl     0:03 /usr/lib/firefox/firefox -contentproc -childID 27 -is
+ 8912 tty1     Ssl+   8:44 /usr/lib/xorg/Xorg -nolisten tcp -auth /var/run/sddm/
+ 8915 ?        S      4:49 [irq/135-nvidia]
+ 8916 ?        S      0:00 [nvidia]
+ 8917 ?        S      0:55 [nv_queue]
+10911 ?        Sl     9:01 /usr/lib/firefox/firefox
+10966 ?        Sl     1:16 /usr/lib/firefox/firefox -contentproc -childID 1 -isF
+11019 ?        Sl     0:08 /usr/lib/firefox/firefox -contentproc -childID 2 -isF
+11963 ?        Sl     0:01 /snap/code/25/usr/share/code/code /snap/code/25/usr/s
+12434 ?        I      0:03 [kworker/1:0-eve]
+13002 ?        I      0:01 [kworker/2:3-mm_]
+13223 ?        I      0:00 [kworker/u12:2-e]
+13275 ?        Sl     0:08 /usr/lib/firefox/firefox -contentproc -childID 28 -is
+13312 ?        Sl     0:00 /usr/lib/firefox/firefox -contentproc -childID 29 -is
+14287 ?        I      0:00 [kworker/0:0-cgr]
+14363 ?        S<Ls   0:13 /usr/bin/atop -R -w /var/log/atop/atop_20200309 600
+14826 ?        Sl     0:01 /home/nrs32/.vscode/extensions/ms-vscode.cpptools-0.2
+15170 ?        I      0:02 [kworker/4:1-eve]
+15420 ?        I      0:00 [kworker/5:2-eve]
+17574 ?        Sl     0:30 /home/nrs32/.vscode/extensions/ms-vscode.cpptools-0.2
+18833 ?        Ss     0:00 /usr/sbin/cupsd -l
+18834 ?        Ssl    0:00 /usr/sbin/cups-browsed
+18865 ?        I      0:00 [kworker/5:1-eve]
+18866 ?        I      0:00 [kworker/5:3-cgr]
+18867 ?        I      0:00 [kworker/4:0]
+18905 pts/0    S+     0:00 script script.txt
+18906 pts/1    Ss     0:00 bash -i
+18924 pts/1    S+     0:00 ./snshell
+18945 pts/1    R+     0:00 ps -ax
+23535 ?        Sl     0:30 /home/nrs32/.vscode/extensions/ms-vscode.cpptools-0.2
+28523 ?        I      0:10 [kworker/2:1-cgr]
+29373 ?        Sl     0:00 /usr/lib/gvfs/gvfsd-trash --spawner :1.29 /org/gtk/gv
+29389 ?        Sl     0:00 /usr/lib/gvfs/gvfsd-network --spawner :1.29 /org/gtk/
+29399 ?        Sl     0:00 /usr/lib/gvfs/gvfsd-smb-browse --spawner :1.29 /org/g
+29412 ?        Sl     0:00 /usr/lib/gvfs/gvfsd-dnssd --spawner :1.29 /org/gtk/gv
+29516 ?        Ssl    0:00 /usr/lib/gvfs/gvfsd-metadata
+29690 ?        Sl     2:12 /usr/lib/firefox/firefox -contentproc -childID 13 -is
+29724 ?        Sl     2:56 /usr/lib/firefox/firefox -contentproc -childID 14 -is
+ls &
+[35mSNShell [36m/home/nrs32/cs232/homework04/OS-Projects[0m
+$ CalOS  CommandShell  FileCopy  README.md
+ps
+  PID TTY          TIME CMD
+18906 pts/1    00:00:00 bash
+18924 pts/1    00:00:00 snshell
+18945 pts/1    00:00:00 ps <defunct>
+18947 pts/1    00:00:00 ls <defunct>
+18948 pts/1    00:00:00 ps
+[35mSNShell [36m/home/nrs32/cs232/homework04/OS-Projects[0m
+$ hi
+Hello
+[35mSNShell [36m/home/nrs32/cs232/homework04/OS-Projects[0m
+$ hello
+Hi
+[35mSNShell [36m/home/nrs32/cs232/homework04/OS-Projects[0m
+$ cd invalidFileName
+Error changing directory: No such file or directory
+[35mSNShell [36m/home/nrs32/cs232/homework04/OS-Projects[0m
+$ cd .. &
+[35mSNShell [36m/home/nrs32/cs232/homework04[0m
+$ pwd &
+[35mSNShell [36m/home/nrs32/cs232/homework04[0m
+$ /home/nrs32/cs232/homework04
+ls ../
+homework02  homework03	homework04
+[35mSNShell [36m/home/nrs32/cs232/homework04[0m
+$ cat ./OS-Projects/CommandShell/main.cpp
+#include "SNShell.h"
+
+// Run SNShell
+int main()
+{
+   SNShell myShell;
+   myShell.run();
+}[35mSNShell [36m/home/nrs32/cs232/homework04[0m
+$ cd OS-Projects/CommandShell
+[35mSNShell [36m/home/nrs32/cs232/homework04/OS-Projects/CommandShell[0m
+$ mkdir thisIsATest
+[35mSNShell [36m/home/nrs32/cs232/homework04/OS-Projects/CommandShell[0m
+$ ls
+CommandLine.cpp  Path.h      SNShell.h	grading.txt  snshell	  thisIsATest
+CommandLine.h	 Prompt.cpp  Utils.cpp	main.cpp     snshell.cpp
+Path.cpp	 Prompt.h    Utils.h	script.txt   snshell.exe
+[35mSNShell [36m/home/nrs32/cs232/homework04/OS-Projects/CommandShell[0m
+$ cd thisIsATest
+[35mSNShell [36m/home/nrs32/cs232/homework04/OS-Projects/CommandShell/thisIsATest[0m
+$ mkdir insideTest &
+[35mSNShell [36m/home/nrs32/cs232/homework04/OS-Projects/CommandShell/thisIsATest[0m
+$ ls
+insideTest
+[35mSNShell [36m/home/nrs32/cs232/homework04/OS-Projects/CommandShell/thisIsATest[0m
+$ touch file.txt
+[35mSNShell [36m/home/nrs32/cs232/homework04/OS-Projects/CommandShell/thisIsATest[0m
+$ ls
+file.txt  insideTest
+[35mSNShell [36m/home/nrs32/cs232/homework04/OS-Projects/CommandShell/thisIsATest[0m
+$ less file.txt
+WARNING: terminal is not fully functional
+
+file.txt  (press RETURN)
+
+
+file.txt (END)
+...skipping...
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+(END)
+
+
+[35mSNShell [36m/home/nrs32/cs232/homework04/OS-Projects/CommandShell/thisIsATest[0m
+$ vim file.txt
+[m[m[0m[H[2J[24;1H"file.txt" 0L, 0C[2;1H�[6n[2;1H  [1;1H[2;1H[1m[34m~                                                                               [3;1H~                                                                               [4;1H~                                                                               [5;1H~                                                                               [6;1H~                                                                               [7;1H~                                                                               [8;1H~                                                                               [9;1H~                                                                               [10;1H~                                                                               [11;1H~                                                                               [12;1H~                                                                               [13;1H~                                                                               [14;1H~                                                                               [15;1H~                                                                               [16;1H~                                                                               [17;1H~                                                                               [18;1H~                                                                               [19;1H~                                                                               [20;1H~                                                                               [21;1H~                                                                               [22;1H~                                                                               [23;1H~                                                                               [0m[24;63H0,0-1[9CAll[1;1H[24;53HH[1;1H[24;53H [1;1H[24;53HH[1;1H[24;53H [1;1H[24;53HH[1;1H[24;53H [1;1H[24;53HH[1;1H[24;53H [1;1H[24;53HH[1;1H[24;53H [1;1H[24;53Hh[1;1H[24;53H [1;1H[24;53He[1;1H[24;53H [1;1H[24;53Hk[1;1H[24;53H [1;1H[24;53Hi[1;1H[24;53H [1;1H[24;1H[1m-- INSERT --[0m[24;13H[K[24;63H0,1[11CAll[1;1HH[24;63H1,2[1;2He[24;65H3[1;3Hl[24;65H4[1;4Hl[24;65H5[1;5Ho[24;65H6[1;6H[2;1H[K[24;63H2,1[2;1H[24;1H[K[2;1H[24;53H^[[2;1H[24;53H  [2;1H[24;63H2,0-1[9CAll[2;1H[24;53H:[2;1H[24;53H[K[24;1H:qw
+[1m[37m[41mE492: Not an editor command: qw[2;1H[0m[24;63H2,0-1[9CAll[2;1H[24;53H:[2;1H[24;1H[K[24;1H:qw
+[1m[37m[41mE492: Not an editor command: qw[2;1H[0m[24;63H2,0-1[9CAll[2;1H[24;53H:[2;1H[24;1H[K[24;1H:wq
+"file.txt" 2L, 7C written
+[24;1H[K[24;1H[35mSNShell [36m/home/nrs32/cs232/homework04/OS-Projects/CommandShell/thisIsATest[0m
+[35mSNShell [36m/home/nrs32/cs232/homework04/OS-Projects/CommandShell/thisIsATest/insideTest[0m
+$ less file.txt
+WARNING: terminal is not fully functional
+
+file.txt  (press RETURN)
+
+Hello
+
+file.txt (END)
+
+
+:qw: No such file or directory  (press RETURN)
+...skipping...
+Hello
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+file.txt (END)
+[35mSNShell [36m/home/nrs32/cs232/homework04/OS-Projects/CommandShell/thisIsATest/insideTest[0m
+$ No command provided.
+
+]0;nrs32@maroon11: ~/cs232/homework04/OS-Projects/CommandShell[01;32mnrs32@maroon11[00m:[01;34m~/cs232/homework04/OS-Projects/CommandShell[00m$ exit
+
+Script done on 2020-03-09 20:22:21-0400
