@@ -76,7 +76,7 @@ void SNShell::handleCommand(Path path) {
  * Allow parent to change directory to given path, or default to home
  * @param CL the current commandLine
  * */
-void SNShell::handleCd(CommandLine CL) {
+void SNShell::handleCd(CommandLine &CL) {
     int numArgs = CL.getArgCount();
 
     if (numArgs > 2) {

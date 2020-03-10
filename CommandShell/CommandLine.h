@@ -5,7 +5,6 @@
  * 3 March 2020
  */
 
-
 #include <iostream>
 #include <cstdlib>
 #include <vector>

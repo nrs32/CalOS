@@ -16,7 +16,4 @@ class Path {
 
 		int find(const string& program) const;
 		string getDirectory(int i) const;
-
-		// TODO: comment out / delete -- used for testing
-		vector<string> get() { return directories; }
 };

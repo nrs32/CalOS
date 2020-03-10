@@ -13,7 +13,7 @@
 class SNShell {
 	void handleCommand(Path path);
 	void childExecuteCommand(CommandLine CL, Path path);
-	void handleCd(CommandLine CL);
+	void handleCd(CommandLine &CL);
 
 	public:
 		SNShell() {};

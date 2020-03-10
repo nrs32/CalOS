@@ -49,7 +49,7 @@ CommandLine::CommandLine(istream& in){
     }
 
     tempStorage = (char*) calloc (argSize, sizeof(char));
-    tempStorage = argument.c_str();
+    strcpy(tempStorage, argument.c_str());
     argv = split(tempStorage, space);
 }
 
@@ -131,7 +131,9 @@ char** CommandLine::split(char* str, char* delimeter) {
  * Destructor   
  * */
 CommandLine::~CommandLine() {
-    // free(tempStorage);
-    // argv = NULL;
-    // tempStorage = NULL;
+    if (tempStorage != NULL) {
+        free(tempStorage);
+        argv = NULL;
+        tempStorage = NULL;
+    }
 }
