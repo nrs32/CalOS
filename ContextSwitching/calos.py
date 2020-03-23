@@ -47,18 +47,87 @@ class CalOS:
         '''Called when the timer expires. If there is no process in the
         ready queue, reset the timer and continue.  Else, context_switch.
         '''
+        if self._debug: print("timer_isr: End of quantum!")
+
+        # save CPU regs into current_proc
+        CalOS.current_proc.set_registers(self._cpu.get_registers())
+
+        # if ready queue is empty
+        if (len(self._ready_q) == 0):
+            CalOS.reset_timer(self)
+
+            # restore CPU regs to current process
+            self._cpu.set_registers(CalOS.current_proc.get_registers())
+            return
+
+        # Processes are ready, let another run
+        CalOS.context_switch(self)
+        CalOS.reset_timer(self)
         pass
 
     def context_switch(self):
         '''Do a context switch between the current_proc and the process
         on the front of the ready_q.
         '''
+        # Get the new process's PCB off the front of the ready queue.
+        next_pcb = self._ready_q[0]
+
+        # Remove new process's PCB from queue
+        self._ready_q.pop(0)
+
+        if self._debug: print("context_switch: Switching procs from {} to {}".format(CalOS.current_proc.get_name(), next_pcb.get_name()))
+
+        # Save the CPU's registers into the currently-running process's PCB.
+        CalOS.current_proc.set_registers(self._cpu.get_registers())
+
+        # Load the CPU's registers with the registers stored in the new process's PCB.
+        self._cpu.set_registers(next_pcb.get_registers())
+
+        # Put the old process on the end of the ready queue.
+        CalOS.add_to_ready_q(self, CalOS.current_proc)
+
+        # Set the new process to RUNNING state.
+        next_pcb.set_state(PCB.RUNNING)
+
+        # Set current_proc to the new process.
+        CalOS.current_proc = next_pcb
+
+        if self._debug:
+            print("context_switch: queue is now:")
+            for p in self._ready_q:
+                print("\t" + str(p))
+            print("Num ready processes = {}".format(len(self._ready_q)))
+
         pass
 
     def run(self):
         '''Startup the timer controller and execute processes in the ready
         queue on the given cpu -- i.e., run the operating system!
         '''
+        if self._debug: print("Calos.run: number ready processes = ", len(self._ready_q))
+
+        # while the ready queue is not empty:
+        while len(self._ready_q) != 0:
+            # Remove the PCB from the front of the ready queue and set current_proc to the result.
+            CalOS.current_proc = self._ready_q[0]
+            
+            # Remove new process's PCB from queue
+            self._ready_q.pop(0)
+
+            # Call reset_timer to set the timer controller's countdown.
+            CalOS.reset_timer(self)
+
+            # Load the CPU's registers with the registers stored in the current_proc.
+            self._cpu.set_registers(CalOS.current_proc.get_registers())
+
+            # Call CPU's run_process() method.
+            self._cpu.run_process()
+
+            # Set the current_proc's state to DONE.
+            CalOS.current_proc.set_state(PCB.DONE)
+            
+            if self._debug: print("Calos.run: Done running {} \nnumber ready processes = {}".format(CalOS.current_proc.get_name(), len(self._ready_q)))
+
         pass
 
     def reset_timer(self):
