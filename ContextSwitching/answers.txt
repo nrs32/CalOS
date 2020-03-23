@@ -1,0 +1,24 @@
+Where is the PCB class defined?
+---PCB class is defined in calos.py
+
+What information does a PCB object contain?
+---The state of the PCB, pid, name, entry point, registers, and quantum
+
+When is a PCB created? Which line in which file creates a PCB?
+---In main.py on line 179 inside of _load_program
+
+What process states have been defined?
+---NEW, READY, RUNNING, WAITING, DONE
+
+Regarding the variable current_proc: Where has it been defined and what is its significance?
+---current_proc is defined in calos.py and refers to the current process's PCB, which is the process that is RUNNING
+
+In the TimerController class, what does code that reads
+ 	with self._mutex:
+ 	    code here... 		
+do?
+---It ensures that there will not be a race condition for the variable countdown, which is only set after with self._mutex
+
+In the TimerController class, explain what the code does when the countdown goes to 0 (i.e., the time expires).
+---An interrupt is raised once countdown is 0 and the timer expired. 
+Then the timer waits for the interrupt to be handled before starting another countdown.
