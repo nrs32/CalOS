@@ -7,8 +7,14 @@ Customers must wait to enter the bakery when it is full and wait for their bread
   
 Customers and baker print updates of their progress in the console.   
   
-## Command Shell
-SNShell is a command shell that reads a user command from the keyboard and performs that command on behalf of the user.  
+**Compile Program**  
+`gcc main.c -o main -lpthread`  
+
+**Run Program**  
+`./main`  
+  
+## Command Shell  
+SNShell (Sebrina-Nikita) is a command shell that reads a user command from the keyboard and performs that command on behalf of the user.  
   
 Supported commands are: `ls`, `ps`, `pwd`, `cd` and `pwd`.  
 
@@ -19,6 +25,9 @@ Command prompt shows SNShell in magenta and current directory path in cyan.
 
 **Run Program**  
 `./snshell`  
+  
+**Example Run:**  
+![image](https://user-images.githubusercontent.com/38587739/78515928-b6d52880-7785-11ea-8ad1-96e867bb93aa.png)  
   
 ## Context Switching  
 Improve CalOS to handle context switching based on time slice.   
