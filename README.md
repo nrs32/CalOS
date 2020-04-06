@@ -1,4 +1,4 @@
-## Concurrent Baking  
+## Concurrent Bakery  
 Run a bakery using threads and semophores for concurrency.   
   
 There is one baker who bakes bread and checks out customers concurrently.   
