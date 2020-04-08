@@ -1,3 +1,14 @@
+/**
+ * Use threads to contol customer and baker threads.
+ * Using semaphores we can control 
+ * 		- how many customers are in the store
+ * 		- customer - baker interactions
+ * 		- and the baker's work
+ * 
+ * @author Nikita Sietsema
+ * @date 4 April, 2020
+ */
+
 #include <stdio.h>
 #include <pthread.h>
 #include <semaphore.h>
@@ -117,18 +128,18 @@ void *cashier(void *arg)
 
 		// Remove loaf from bread shelf (protected by busy semiphore)
 		num_loaves_on_shelf--;
-		fprintf(stderr, "Baker: \"Here is your loaf!\"\n");
+		fprintf(stderr, "Baker (at register): \"Here is your loaf!\"\n");
 		sem_post(loaf_mutex);
 
 		// Wait for customer to pay and process payment
 		sem_wait(money_mutex);
-		fprintf(stderr, "Baker: *takes payment\n");
+		fprintf(stderr, "Baker (at register): *takes payment\n");
 		usleep(1000000);
 
 		// Give customer reciept
-		fprintf(stderr, "Baker: \"Let me get your reciept...\"\n");
+		fprintf(stderr, "Baker (at register): \"Let me get your reciept...\"\n");
 		usleep(1000000);
-		fprintf(stderr, "Baker: *hands customer reciept\n");
+		fprintf(stderr, "Baker (at register): *hands customer reciept\n");
 		sem_post(reciept_mutex);
 
 		// Release semaphore for busy (we are not with a customer)
@@ -151,7 +162,7 @@ int main()
 		perror("Creating remaining_room_for_customers semaphore failed"); 
 	}
 
-	// Mutex semaphores
+	// Counting Mutex semaphores
 	busy_mutex = sem_open(BUSY_MUTEX, O_CREAT, NULL, 1);
 	loaf_mutex = sem_open(LOAF_MUTEX, O_CREAT, NULL, 0);
 	money_mutex = sem_open(MONEY_MUTEX, O_CREAT, NULL, 0);
