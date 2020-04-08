@@ -1,0 +1,212 @@
+Script started on 2020-04-07 20:08:54-0400
+]0;nrs32@gold26: ~/OS-Projects/ConcurrentBakery[01;32mnrs32@gold26[00m:[01;34m~/OS-Projects/ConcurrentBakery[00m$ ./main
+Time for the Bakery to open!
+Customer 0: enters bakery
+Customer 1: enters bakery
+Customer 2: enters bakery
+Customer 4: enters bakery
+Customer 3: enters bakery
+Baker: *places fresh Zucchini bread on shelf
+Baker (at register): "Here is your loaf!"
+Customer 0: "Thanks for the bread!"
+Customer 0: *hands over money
+Baker (at register): *takes payment
+Baker (at register): "Let me get your reciept..."
+Baker (at register): *hands customer reciept
+Customer 0: "Thanks for my receipt!"
+Customer 0: *leaves
+Baker: *places fresh Sourdough bread on shelf
+Baker (at register): "Here is your loaf!"
+Customer 5: enters bakery
+Customer 1: "Thanks for the bread!"
+Customer 1: *hands over money
+Baker (at register): *takes payment
+Baker (at register): "Let me get your reciept..."
+Baker (at register): *hands customer reciept
+Customer 1: "Thanks for my receipt!"
+Customer 1: *leaves
+Baker: *places fresh Rye bread on shelf
+Customer 6: enters bakery
+Baker (at register): "Here is your loaf!"
+Customer 2: "Thanks for the bread!"
+Customer 2: *hands over money
+Baker (at register): *takes payment
+Baker (at register): "Let me get your reciept..."
+Baker (at register): *hands customer reciept
+Customer 2: "Thanks for my receipt!"
+Customer 2: *leaves
+Baker: *places fresh Zucchini bread on shelf
+Customer 7: enters bakery
+Baker (at register): "Here is your loaf!"
+Customer 4: "Thanks for the bread!"
+Customer 4: *hands over money
+Baker (at register): *takes payment
+Baker (at register): "Let me get your reciept..."
+Baker (at register): *hands customer reciept
+Customer 4: "Thanks for my receipt!"
+Customer 4: *leaves
+Baker: *places fresh French bread on shelf
+Customer 8: enters bakery
+Baker (at register): "Here is your loaf!"
+Customer 3: "Thanks for the bread!"
+Customer 3: *hands over money
+Baker (at register): *takes payment
+Baker (at register): "Let me get your reciept..."
+Baker (at register): *hands customer reciept
+Customer 3: "Thanks for my receipt!"
+Customer 3: *leaves
+Baker: *places fresh Rye bread on shelf
+Customer 9: enters bakery
+Baker (at register): "Here is your loaf!"
+Customer 5: "Thanks for the bread!"
+Customer 5: *hands over money
+Baker (at register): *takes payment
+Baker (at register): "Let me get your reciept..."
+Baker (at register): *hands customer reciept
+Customer 5: "Thanks for my receipt!"
+Customer 5: *leaves
+Baker: *places fresh Sourdough bread on shelf
+Baker (at register): "Here is your loaf!"
+Customer 6: "Thanks for the bread!"
+Customer 6: *hands over money
+Baker (at register): *takes payment
+Baker (at register): "Let me get your reciept..."
+Baker (at register): *hands customer reciept
+Customer 6: "Thanks for my receipt!"
+Customer 6: *leaves
+Baker: *places fresh Sourdough bread on shelf
+Baker (at register): "Here is your loaf!"
+Customer 7: "Thanks for the bread!"
+Customer 7: *hands over money
+Baker (at register): *takes payment
+Baker (at register): "Let me get your reciept..."
+Baker (at register): *hands customer reciept
+Customer 7: "Thanks for my receipt!"
+Customer 7: *leaves
+Baker: *places fresh Rye bread on shelf
+Baker (at register): "Here is your loaf!"
+Customer 8: "Thanks for the bread!"
+Customer 8: *hands over money
+Baker (at register): *takes payment
+Baker (at register): "Let me get your reciept..."
+Baker (at register): *hands customer reciept
+Customer 8: "Thanks for my receipt!"
+Customer 8: *leaves
+Baker: *places fresh French bread on shelf
+Baker: "Finished baking for today! :)"
+Baker (at register): "Here is your loaf!"
+Customer 9: "Thanks for the bread!"
+Customer 9: *hands over money
+Baker (at register): *takes payment
+Baker (at register): "Let me get your reciept..."
+Baker (at register): *hands customer reciept
+Customer 9: "Thanks for my receipt!"
+Customer 9: *leaves
+Bakery closed.
+]0;nrs32@gold26: ~/OS-Projects/ConcurrentBakery[01;32mnrs32@gold26[00m:[01;34m~/OS-Projects/ConcurrentBakery[00m$ ./main
+Time for the Bakery to open!
+Customer 0: enters bakery
+Customer 2: enters bakery
+Customer 3: enters bakery
+Customer 1: enters bakery
+Customer 4: enters bakery
+Baker: *places fresh French bread on shelf
+Baker (at register): "Here is your loaf!"
+Customer 2: "Thanks for the bread!"
+Customer 2: *hands over money
+Baker (at register): *takes payment
+Baker (at register): "Let me get your reciept..."
+Baker (at register): *hands customer reciept
+Customer 2: "Thanks for my receipt!"
+Customer 2: *leaves
+Baker: *places fresh French bread on shelf
+Customer 5: enters bakery
+Baker (at register): "Here is your loaf!"
+Customer 3: "Thanks for the bread!"
+Customer 3: *hands over money
+Baker (at register): *takes payment
+Baker (at register): "Let me get your reciept..."
+Baker (at register): *hands customer reciept
+Customer 3: "Thanks for my receipt!"
+Customer 3: *leaves
+Baker: *places fresh Rye bread on shelf
+Customer 6: enters bakery
+Baker (at register): "Here is your loaf!"
+Customer 1: "Thanks for the bread!"
+Customer 1: *hands over money
+Baker (at register): *takes payment
+Baker (at register): "Let me get your reciept..."
+Baker (at register): *hands customer reciept
+Customer 1: "Thanks for my receipt!"
+Customer 1: *leaves
+Baker: *places fresh Sourdough bread on shelf
+Baker (at register): "Here is your loaf!"
+Customer 4: "Thanks for the bread!"
+Customer 7: enters bakery
+Customer 4: *hands over money
+Baker (at register): *takes payment
+Baker (at register): "Let me get your reciept..."
+Baker (at register): *hands customer reciept
+Customer 4: "Thanks for my receipt!"
+Customer 4: *leaves
+Baker: *places fresh Pumpkin bread on shelf
+Customer 8: enters bakery
+Baker (at register): "Here is your loaf!"
+Customer 0: "Thanks for the bread!"
+Customer 0: *hands over money
+Baker (at register): *takes payment
+Baker (at register): "Let me get your reciept..."
+Baker (at register): *hands customer reciept
+Customer 0: "Thanks for my receipt!"
+Customer 0: *leaves
+Baker: *places fresh Zucchini bread on shelf
+Customer 9: enters bakery
+Baker (at register): "Here is your loaf!"
+Customer 5: "Thanks for the bread!"
+Customer 5: *hands over money
+Baker (at register): *takes payment
+Baker (at register): "Let me get your reciept..."
+Baker (at register): *hands customer reciept
+Customer 5: "Thanks for my receipt!"
+Customer 5: *leaves
+Baker: *places fresh Pumpkin bread on shelf
+Baker (at register): "Here is your loaf!"
+Customer 6: "Thanks for the bread!"
+Customer 6: *hands over money
+Baker (at register): *takes payment
+Baker (at register): "Let me get your reciept..."
+Baker (at register): *hands customer reciept
+Customer 6: "Thanks for my receipt!"
+Customer 6: *leaves
+Baker: *places fresh Zucchini bread on shelf
+Baker (at register): "Here is your loaf!"
+Customer 7: "Thanks for the bread!"
+Customer 7: *hands over money
+Baker (at register): *takes payment
+Baker (at register): "Let me get your reciept..."
+Baker (at register): *hands customer reciept
+Customer 7: "Thanks for my receipt!"
+Customer 7: *leaves
+Baker: *places fresh Pumpkin bread on shelf
+Baker (at register): "Here is your loaf!"
+Customer 8: "Thanks for the bread!"
+Customer 8: *hands over money
+Baker (at register): *takes payment
+Baker (at register): "Let me get your reciept..."
+Baker (at register): *hands customer reciept
+Customer 8: "Thanks for my receipt!"
+Customer 8: *leaves
+Baker: *places fresh Pumpkin bread on shelf
+Baker: "Finished baking for today! :)"
+Baker (at register): "Here is your loaf!"
+Customer 9: "Thanks for the bread!"
+Customer 9: *hands over money
+Baker (at register): *takes payment
+Baker (at register): "Let me get your reciept..."
+Baker (at register): *hands customer reciept
+Customer 9: "Thanks for my receipt!"
+Customer 9: *leaves
+Bakery closed.
+]0;nrs32@gold26: ~/OS-Projects/ConcurrentBakery[01;32mnrs32@gold26[00m:[01;34m~/OS-Projects/ConcurrentBakery[00m$ exit
+
+Script done on 2020-04-07 20:10:27-0400

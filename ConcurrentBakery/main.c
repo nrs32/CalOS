@@ -40,9 +40,9 @@ int num_loaves_on_shelf = 0; // protected by busy_mutex
 /* This is a customer thread */
 void *customer(void *arg)
 {
-	// Wait for room in the bakery so I can enter
+    // Wait for room in the bakery so I can enter
 	sem_wait(remaining_room_for_customers);
-    fprintf(stderr, "Customer %ld: enters bakery\n", (intptr_t) arg);
+    fprintf(stderr, "Customer %ld: *enters bakery\n", (intptr_t) arg);
 	
 	// Wait to get to the register
 	sem_wait(register_mutex);

@@ -1,0 +1,24 @@
+Does your program run the same way each time? Why?
+--> It runs extremely similarly each time. 
+
+    Since the customers in the store are all waiting to acquire the semaphore to checkout (register_mutext)
+    one has always posted to the customer_ready_mutex
+    the cashier thread quickly moves past waiting for it and then waits on the semaphore used to determine the baker's task (busy_mutex).
+    Once the cashier is busy at the register, the baker thread waits for the busy semaphore.
+    While the baker is baking, the cashier thread waits for the busy semaphore.
+    **Since these two threads always start waiting while the other is busy, the threads are always alternating control.
+
+    Customers enter the store at various times. 
+    This is not always consistant and may happen at somewhat random times shortly after a customer leaves.
+    This is dependant on which thread is currently running, as soon as a waiting customer is run, this customer will enter.
+
+    The order of the customers entering the store and checking out is random.
+    This is arbitrary and based on which threads get to run when.
+
+    The interactions between customers and bakers are always the same order because they are heavily controlled by semaphores.
+
+Give your last customer thread the highest priority. 
+Does this ensure that this customer is always given first priority? Why or why not? 
+--> This did not guarentee that this customer had first priority because it must still wait to access semaphores.
+    Since the last thread is not created yet, others threads usually get semaphores before the high priority thread can even take priority.
+    Also, lower priority threads can not be starved and will sometimes run before the highest priority thread.
