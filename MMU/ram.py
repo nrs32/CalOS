@@ -18,3 +18,12 @@ class RAM:
     def is_legal_addr(self, addr):
         return self._minAddr <= addr <= self._maxAddr
 
+class MMU:
+    def __init__(self, ram):
+        self._ram = ram
+
+    def get_value(self, addr):
+        return self._ram.__getitem__(addr)
+
+    def set_value(self, addr, value):
+        self._ram.__setitem__(addr, value)
