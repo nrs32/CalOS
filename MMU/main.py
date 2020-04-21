@@ -183,6 +183,7 @@ class Monitor:
                 if self._debug:
                     print("Created PCB for process {}".format(procname))
                 addr = startaddr
+                pcb.set_low_mem(addr)
                 for line in f:
                     line = line.strip()
                     if line == '':
@@ -195,6 +196,8 @@ class Monitor:
                         addr += 1
                     elif line.startswith("__main:"):
                         self._handle_main_label(addr, line, pcb)
+                    elif line.startswith("__data:"):
+                        self._handle_data_label(addr, line, pcb)
                     else:   # the line is regular code: store it in ram
                         self._ram[addr] = line
                         addr += 1
@@ -208,8 +211,8 @@ class Monitor:
 
     def _handle_main_label(self, addr, line, pcb):
         """line from the file has format __main: <addr>,
-        which indicates where the entry point is.  Note: all
-        addresses in the code are logical.
+        which indicates where the entry point is.  
+        Note: all addresses in the code are logical.
         e.g., __main: 0 means the code assumes
         the executable lives at 0.  It might be loaded
         into some other location, which is the value in addr.
@@ -220,6 +223,24 @@ class Monitor:
         pcb.set_entry_point(logical_addr)
         if self._debug:
             print("__main found at physical location", addr, "but logical addr", logical_addr)
+
+    def _handle_data_label(self, addr, line, pcb):
+        """line from the file has format __data: <value>, 
+        which indicates how much space must be reserved for the program daa.  
+        e.g., __data: 5 means the program needs 5 bytes of data space to be reserved after the program code.
+        addr is the starting low memory address
+        """
+        if len(line.split()) != 2:
+            raise ValueError("Illegal format: __data: must be followed by data size in bytes.")
+        
+        bytes_of_data = int(line.split()[1])
+        high_mem_addr = addr + bytes_of_data
+        pcb.set_high_mem(high_mem_addr)
+        
+        if self._debug:
+            print("Bytes needed for program data: ", bytes_of_data,
+                  "\nGiven low memory address: ", addr,
+                  "\nHigh memory location set to: ", high_mem_addr)
 
     def _write_program(self, startaddr, endaddr, tapename):
         '''Write memory from startaddr to endaddr to tape (a file).'''
