@@ -29,6 +29,11 @@ Command prompt shows SNShell in magenta and current directory path in cyan.
 **Example Run:**  
 ![image](https://user-images.githubusercontent.com/38587739/78515928-b6d52880-7785-11ea-8ad1-96e867bb93aa.png)  
   
+## MMU for CalOS  
+Improve CalOS to support both logical and physical address spaces.  
+  
+There should be a Memory Management Unit used to validate logical addresses and translate them to their corresponding physical address.
+  
 ## Context Switching  
 Improve CalOS to handle context switching based on time slice.   
   
