@@ -103,6 +103,7 @@ class CalOS:
 
         old_proc.set_registers(cpu.get_registers())
         cpu.set_registers(new_proc.get_registers())
+        cpu.set_mmu_registers(new_proc.get_low_mem(), new_proc.get_high_mem() - new_proc.get_low_mem())
 
         self.add_to_ready_q(old_proc)
         new_proc.set_state(PCB.RUNNING)
@@ -167,6 +168,7 @@ class CalOS:
         self._current_proc[cpu.get_num()] = new_proc
         self.reset_timer(cpu)
         cpu.set_registers(new_proc.get_registers())
+        cpu.set_mmu_registers(new_proc.get_low_mem(), new_proc.get_high_mem() - new_proc.get_low_mem())
         new_proc.set_state(PCB.RUNNING)
 
 class PCB:
