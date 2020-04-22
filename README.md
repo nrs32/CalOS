@@ -30,9 +30,40 @@ Command prompt shows SNShell in magenta and current directory path in cyan.
 ![image](https://user-images.githubusercontent.com/38587739/78515928-b6d52880-7785-11ea-8ad1-96e867bb93aa.png)  
   
 ## MMU for CalOS  
-Improve CalOS to support both logical and physical address spaces.  
+Improve CalOS to support both logical and physical address spaces. Logical address spaces should be zero based.  
   
 There should be a Memory Management Unit used to validate logical addresses and translate them to their corresponding physical address.
+  
+**Run Program**  
+`python3 main.py`  
+  
+**Run Program Example:**  
+Examle run switching between two mult programs saved in different physical addresses (also see Context Switching and CalOS).  
+  
+Toggle Print Progress  
+--> `!`  
+Load mult at location 30  
+--> `l 30 mult.asm`  
+Enter values for mult  
+--> `d 42`    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --> `3`  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --> `3`  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --> `.`  
+Load mult at location 200  
+--> `l 200 mult.asm`  
+Enter values for mult  
+--> `d 212`  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --> `5`  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --> `4`  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --> `.`  
+Run it  
+--> `r`  
+Look at memory for first mult:  
+`s 42 46`  
+Expected results: `3`, `3`, `9`, `0`, `0`  
+Look at memory for second mult:  
+`s 212 216`  
+Expected results: `5`, `4`, `20`, `0`, `0`  
   
 ## Context Switching  
 Improve CalOS to handle context switching based on time slice.   
