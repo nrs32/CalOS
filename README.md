@@ -1,3 +1,11 @@
+## Bash Script  
+Unzip a directory and remove trailing cruft from the name beginning with `-[digits]`.  
+Rename sub-directories by removing spaces and trailing cruft beginning with `_[digits]_`.  
+Finally remove spaces and unzip files inside the sub-directories.  
+  
+**Run Script**  
+`bash ./moodlefix.bash [-v | --verbose] <fileName>.zip`  
+  
 ## Concurrent Bakery  
 Run a bakery using threads and semophores for concurrency.   
   
